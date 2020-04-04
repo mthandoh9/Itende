@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title></title>
+  <meta http-equiv="Content-Security-Policy" content="default-src *; style-src *  'unsafe-inline'; script-src *  'unsafe-inline'; media-src *">
+  <meta name="viewport"
+    content="initial-scale=1,user-scalable=no, width=device-width, height=device-height, viewport-fit=cover">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="mainStyle.css">
+  <link rel="stylesheet" type="text/css" href="css/jquery.mobile.theme-1.4.5.css">
+  <link rel="stylesheet" type="text/css" href="css/jquery.mobile.icons-1.4.5.min.css">
+  <link rel="stylesheet" type="text/css" href="css/jquery.mobile.structure-1.4.5.css">
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-warning text-dark" id="navbar">
+      <a class="navbar-brand text-dark" href="javascript:history.go(-1)"><i class="fa fa-angle-left fa-lg"></i>
+        <labe id="subTop" class="text-center">Download Files</labe><i class="fa fa-cloud-download "></i>
+      </a>
+      <button class="navbar-toggler" onclick="menu()" type="button">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse" style="margin-top: 10px;">
+        <ul class="navbar-nav mr-auto">
+          <li><a class="nav-item" href="DownloadBeats.html">Beats <i class="fa fa-arrow-circle-down"></i></a></li>
+          <li><a class="nav-item" href="downloadFiles.html">Files <i class="fa fa-arrow-circle-down"></i></a></li>
+          <li><a class="nav-item" href="TempoChanger.html">TempoChanger <i class="fa fa-play-circle-o"></i></a></li>
+          <li><a class="nav-item" href="tutorials.html">Tutorials <i class="fa fa-youtube-play"></i></a></li>
+          <li><a class="nav-item" id="share" href="#share">Share <i class="fa fa-share-alt"></i></a></li>
+          <li><a class="nav-item" href="about.html">About <i class="fa fa-info-circle"></i></a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  
+    
+  
+  
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3 offset-md-4" id="root">
+        <img src="img/loading.gif" id="loading" />
+      </div>
+    </div>
+   
+  </div>
+  <script src="js/slim.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/popper.js"></script>
+  <script type="text/javascript" src="cordova.js"></script>
+  <script src="js/jquery-3.2.1.min.js"></script>
+  <script src="main.js"></script>
+  <script>
+    document.addEventListener("offline", onOffline, false);
+
+    function onOffline() {
+      window.plugins.toast.showLongBottom('NO INTERNET CONNECTION!', function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+      $('#loading').hide();
+      return;
+    }
+    window.onload = function () {
+
+      if (window.AdMob) AdMob.showInterstitial();
+      event.preventDefault();
+      $.ajax({
+
+        url: "https://techforest.co.za/Itende/getFiles.php",
+        method: "GET",
+        data: null,
+        dataType: "JSON",
+        success: function (mess) {
+          var content = "";
+          for (var x = 0; x < mess[0].length - 1; x++) {
+
+           
+            content += "<a class='btn btn-lg btn-block btn-warning' onclick='downloadFile2(\"" + mess[1][x] + "\")' download >" + mess[0][x] + "</a>";
+
+            // content += "<a class='btn btn-lg btn-block btn-warning' href='" + mess[1][x] + "' target='_blank'  >" + mess[0][x] + "</a>";
+          }
+           // content +="<a class='btn btn-lg btn-block btn-success' onclick='showPayPal()'>Buy Roland E300(R45.00)</a>";
+          document.getElementById("root").innerHTML = content;
+          $('#loading').hide();
+          window.plugins.toast.showLongBottom('Success!', function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+        },
+        error: function (err) {
+          window.plugins.toast.showLongBottom('Server Error!', function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+          $('#loading').hide();
+        }
+      })
+    }
+   
+    function downloadFile2(x) {
+      if (window.AdMob) AdMob.showInterstitial();
+      event.preventDefault();
+      window.plugins.toast.showShortTop('Downloading...', function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+      //after device is ready
+      var fail = function (message) {
+        window.plugins.toast.showLongBottom('Error Occured!' + err, function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+      }
+      var success = function (data) {
+        console.log("succes");
+        window.plugins.toast.showLongBottom('Success!' + err, function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+      }
+      var baseLink ="https://techforest.co.za/Itende/beats/";
+      var baseLength = baseLink.length;
+      var full = x.length;
+      var fileName = x.substring(baseLength,full);
+      cordova.plugins.DownloadManager.download(x,fileName, success, fail);
+    }
+    function openBrowser(x) {
+      var url = x.toString();
+      var target = '_blank';
+      var options = "location = yes"
+      var ref = cordova.InAppBrowser.open(url, target, options);
+
+      ref.addEventListener('loadstart', loadstartCallback);
+      ref.addEventListener('loadstop', loadstopCallback);
+      ref.addEventListener('loaderror', loaderrorCallback);
+      ref.addEventListener('exit', exitCallback);
+
+      function loadstartCallback(event) {
+        alert('Loading started: ' + event.url);
+      }
+
+      function loadstopCallback(event) {
+        alert('Loading finished: ' + event.url);
+      }
+
+      function loaderrorCallback(error) {
+        alert('Loading error: ' + error.message);
+      }
+
+      function exitCallback() {
+        alert('Browser is closed...');
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title></title>
+  <meta http-equiv="Content-Security-Policy" content="default-src *; style-src *  'unsafe-inline'; script-src *  'unsafe-inline'; media-src *">
+  <meta name="viewport"
+    content="initial-scale=1,user-scalable=no, width=device-width, height=device-height, viewport-fit=cover">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="mainStyle.css">
+  <link rel="stylesheet" type="text/css" href="css/jquery.mobile.theme-1.4.5.css">
+  <link rel="stylesheet" type="text/css" href="css/jquery.mobile.icons-1.4.5.min.css">
+  <link rel="stylesheet" type="text/css" href="css/jquery.mobile.structure-1.4.5.css">
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-warning text-dark" id="navbar">
+      <a class="navbar-brand text-dark" href="javascript:history.go(-1)"><i class="fa fa-angle-left fa-lg"></i>
+        <labe id="subTop" class="text-center">Download Beats</labe><i class="fa fa-cloud-download"></i>
+      </a>
+      <button class="navbar-toggler" onclick="menu()" type="button">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse" style="margin-top: 10px;">
+        <ul class="navbar-nav mr-auto">
+          <li><a class="nav-item" href="DownloadBeats.html">Beats <i class="fa fa-arrow-circle-down"></i></a></li>
+          <li><a class="nav-item" href="downloadFiles.html">Files <i class="fa fa-arrow-circle-down"></i></a></li>
+          <li><a class="nav-item" href="TempoChanger.html">TempoChanger <i class="fa fa-play-circle-o"></i></a></li>
+          <li><a class="nav-item" href="tutorials.html">Tutorials <i class="fa fa-youtube-play"></i></a></li>
+          <li><a class="nav-item" id="share" href="#share">Share <i class="fa fa-share-alt"></i></a></li>
+          <li><a class="nav-item" href="about.html">About <i class="fa fa-info-circle"></i></a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <iframe id="my_iframe" style="display:none;"></iframe>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3 offset-md-4" id="root">
+        <center><img src="img/loading.gif" id="loading" /></center>
+      </div>
+    </div>
+    <div id="digitalgoods-250919164159-di02" style="display: none;"></div>
+    <script>(function (div, currency) { var item_total = { currency_code: currency, value: '3.00', }, tax_total = { currency_code: currency, value: '0.00' }, render = function () { paypal.Buttons({ createOrder: function (data, actions) { return actions.order.create({ application_context: { brand_name: "Itende App Digital Good", landing_page: "BILLING", shipping_preference: "NO_SHIPPING", payment_method: { payee_preferred: "UNRESTRICTED" } }, purchase_units: [{ description: "Itende App Digital Good", soft_descriptor: "ITENDEAPPDIGITALGOOD", amount: { breakdown: { item_total: item_total, tax_total: tax_total }, value: '3.00' }, items: [{ name: "ALL Fruity Loops beats", quantity: 1, description: "All Roland Beats in FL format", sku: "DI02", unit_amount: item_total, tax: tax_total }] }] }); }, onApprove: function (data, actions) { return actions.order.capture().then(function (details) { div.innerHTML = "Order completed. You\x27ll receive an email shortly!"; }); }, onCancel: function (data) { }, onError: function (err) { div.innerHTML = "<pre>" + err.toString() } }).render("#digitalgoods-250919164159-di02"); }, init = function () { var script = document.createElement("script"); script.type = "text/javascript"; script.src = "https://www.paypal.com/sdk/js?client-id=AYF3Az0L0C_OkO_MZqDMeg8OjenOdJPPu-pHIRutJV_2E4gaFytXri0uhlDDn7-c4q9c87FKe96xRbbj\x26currency=USD"; script.onload = render; div.appendChild(script); }; init(); })(document.getElementById("digitalgoods-250919164159-di02"), "USD");</script>
+  </div>
+  <script src="js/slim.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/popper.js"></script>
+  <script type="text/javascript" src="cordova.js"></script>
+  <script src="js/jquery-3.2.1.min.js"></script>
+  <script src="main.js"></script>
+  <script>
+    document.addEventListener("offline", onOffline, false);
+
+    function onOffline() {
+      window.plugins.toast.showLongBottom('NO INTERNET CONNECTION!', function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+      $('#loading').hide();
+      return;
+    }
+    window.onload = function () {
+     // if (window.AdMob) AdMob.showInterstitial();
+    //  event.preventDefault();
+
+      $.ajax({
+
+        url: "https://techforest.co.za/Itende/getBeats.php",
+       // url: "http://www.techforest.co.za/Itende/getBeats.php",
+        method: "GET",
+        data: null,
+        dataType: "JSON",
+        success: function (mess) {
+          var content = "";
+          console.log(mess)
+          for (var x = 0; x < mess[0].length - 1; x++) {
+            content += "<a class='btn btn-lg btn-block btn-warning' href='#' onclick='downloadFile2(\"" + mess[1][x] + "\")' download >" + mess[0][x] + "</a>";
+            // content += "<a class='btn btn-lg btn-block btn-warning' href='#' onclick='downloadFile2(\"" + mess[1][x] + "\")' >m3" + mess[0][x] + "</a>";
+          }
+          //content +="<a class='btn btn-lg btn-block btn-success' onclick='showPayPal()' style='margin-bottom:60px;'>Buy Roland FL Beats(R45.00)</a>";
+          document.getElementById("root").innerHTML = content;
+          $('#loading').hide();
+          window.plugins.toast.showLongBottom('Success!', function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+        },
+        error: function (err) {
+          window.plugins.toast.showLongBottom('Server Error!', function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+          $('#loading').hide();
+        }
+      })
+    }
+    function downloadFile2(x) {
+
+      if (window.AdMob) AdMob.showInterstitial();
+      event.preventDefault();
+
+      window.plugins.toast.showShortTop('Downloading...', function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+      //after device is ready
+      var fail = function (message) {
+        window.plugins.toast.showLongBottom('Error Occured!' + err, function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+      }
+      var success = function (data) {
+        console.log("succes");
+        window.plugins.toast.showLongBottom('Success!' + err, function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+      }
+      var baseLink ="https://techforest.co.za/Itende/beats/";
+      var baseLength = baseLink.length;
+      var full = x.length;
+      var fileName = x.substring(baseLength,full);
+      cordova.plugins.DownloadManager.download(x,fileName, success, fail);
+    }
+
+    function mt1() {
+
+      var fileTransfer = new FileTransfer();
+      var uri = encodeURI(x);
+      var fileURL = "cdvfile://localhost/persistent/" + filename;
+      var fileURL = cordova.file.documentsDirectory + filename;
+      alert(fileURL);
+      fileTransfer.download(
+        uri, fileURL, function (entry) {
+          alert("Download complete: " + entry.toURL());
+          document.getElementById("imageDownloaded").src = cordova.file.applicationStorageDirectory + "Documents/" + filename;
+        },
+        function (error) {
+          alert("Download error source " + error.source);
+        },
+        true
+      );
+    }
+
+
+  </script>
+</body>
+
+</html>

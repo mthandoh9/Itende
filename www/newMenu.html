@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Facebook</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div id="overlay"></div>
+    <div class="wrapper">
+        
+        <div class="nav">
+            <div class="appName">Itende Style App</div>
+            <ul class="menu" id="smallnav">
+                <li><a class="nav-link" href="DownloadBeats.html">Download Beats</a></li>
+                <li><a class="nav-link" href="downloadFiles.html">Download Files</a></li>
+                <li><a class="nav-link" href="TempoChanger.html">Mp3 TempoChanger</a></li>
+                <li><a class="nav-link" href="tutorials.html">Watch Tutorials</a></li>
+            </ul>
+            <div class="menuicon" id="menu">
+                <span id="showw">*</span><span id="close">~</span>
+            </div>
+            <div class="smallMenu"></div>
+        </div>
+    </div>
+    <script src="js/jquery.js"></script>
+    <script>
+            $('#showw').click(function(){                
+                $('#smallnav').show(500);
+                $(this).hide();
+                $('#close').show();
+            });
+
+            $('#close').click(function(){                
+                $('#smallnav').hide(500);
+                $(this).hide();
+                $('#showw').show();
+            });
+        
+            
+            $('body').change(function(){
+                if(window.innerWidth > 650){
+                    $('#menu').show();
+                }
+            });
+            
+
+    </script>
+</body>
+</html>

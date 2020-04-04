@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="mainStyle.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.mobile.theme-1.4.5.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.mobile.icons-1.4.5.min.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.mobile.structure-1.4.5.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-warning text-dark" id="navbar">
+            <a class="navbar-brand text-dark" href="#" onclick="goback()">&larr;</a><label
+                style="font-size:14pt; font-weight: bold;">Download Beats</label>
+            <button class="navbar-toggler" onclick="menu()" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </nav>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown bg-dark">
+                    <a class="nav-link" href="#" onclick="comingSoon()">Download Beats</a>
+                    <a class="nav-link" href="tutorials.html">Video Tutorials</a>
+                    <a class="nav-link" id="share" href="#share">Invite A Friend</a>
+                    <a class="nav-link" href="about.html">About</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <br /><br />
+    <div class="container-fluid " style="margin-top:70px;">
+        <div class="row">
+            <h2 class="text-center">OnSale</h2>
+            <div class="col-md-3 offset-md-4" id="root">
+
+            </div>
+        </div>
+    </div>
+
+    <script src="js/slim.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    
+    <script type="text/javascript" src="index.js"></script>
+    
+    <script>
+        window.onload = function () {
+
+            window.onbeforeunload = function () {
+                if (window.AdMob) AdMob.showInterstitial();
+            };
+            event.preventDefault();
+            $.ajax({
+
+                url: "http://www.techforest.co.za/Itende/getSales.php",
+                method: "GET",
+                data: null,
+                dataType: "JSON",
+                success: function (mess) {
+                    console.log(mess);
+                    var content = "";
+
+                    for (var x = 0; x < mess[0].length - 1; x++) {
+
+                        // content += "<a class='btn btn-lg btn-block btn-warning' href='#' onclick='(" + mess[1][x] + "," + mess[0][x] + ") ' target='_blank'  >" + mess[0][x] + "</a>";
+                        content += "<a class='btn btn-lg btn-block btn-warning' href='" + mess[1][x] + "' target='_blank'  >" + mess[0][x] + "</a>";
+
+                    }
+                    document.getElementById("root").innerHTML = content;
+
+                },
+                error: function (err) {
+
+                    alert("Connection Error" + err);
+                }
+            })
+        }
+    </script>
+</body>
+</html>

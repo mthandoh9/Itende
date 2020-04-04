@@ -1,0 +1,80 @@
+<!DOCTYPE HTML >
+
+<html>
+<head>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="mainStyle.css">
+<link rel="stylesheet" type="text/css" href="css/jquery.mobile.theme-1.4.5.css">
+<link rel="stylesheet" type="text/css" href="css/jquery.mobile.icons-1.4.5.min.css">
+<link rel="stylesheet" type="text/css" href="css/jquery.mobile.structure-1.4.5.css">
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>
+
+</head>
+<body >
+    <div class="container">
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-warning text-dark" id="navbar">
+          <a  class="navbar-brand text-dark" href="javascript:history.go(-1)"><i class="fa fa-angle-left fa-lg"></i><b><labe id="subTop" class="text-center">Roland E-68</labe></b></a>
+          <button class="navbar-toggler" onclick="menu()" type="button">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse" style="margin-top: 10px;">
+            <ul class="navbar-nav mr-auto">
+               <li><a class="nav-item" href="DownloadBeats.html">Beats <i class="fa fa-arrow-circle-down"></i></a></li> 
+               <li><a class="nav-item" href="downloadFiles.html">Files <i class="fa fa-arrow-circle-down"></i></a></li> 
+               <li><a class="nav-item" href="TempoChanger.html">TempoChanger <i class="fa fa-play-circle-o"></i></a></li> 
+               <li><a class="nav-item" href="tutorials.html">Tutorials <i class="fa fa-youtube-play"></i></a></li> 
+               <li><a class="nav-item" id="share" href="#share">Share <i class="fa fa-share-alt"></i></a></li> 
+               <li><a class="nav-item" href="about.html">About <i class="fa fa-info-circle"></i></a></li> 
+            </ul>
+          </div>
+        </nav>
+      </div>
+<div id="section1" class="container-fluid" style="background-image: url()">
+           <div class="row">
+            <div class="col-md-3 offset-md-4">
+                
+                <a class="btn btn-lg btn-secondary btn-block " href="e68Beats.html" style="text-decoration:none; color:white;">Worship & Chorus Beats </a>
+
+                <a class="btn btn-lg btn-warning btn-block " href="e68Tones.html" style="text-decoration:none; color:black;">Itende Tones</a>
+                <a  class="btn btn-lg btn-secondary btn-block " onclick="notAvailable()" href="#" style="text-decoration:none; color:white;">How To Set E-68(Video)</a>
+               <a class="btn btn-lg btn-warning btn-block " href="RolandSuppliers.html" style="text-decoration:none; color:black;">Recommended Supplier</a>
+                
+           
+              </div>
+              </div>
+              <div id="overlay-invite">
+                  <div class="invite">
+                    <div class="invite-content">
+                       <ul class="invite-list">
+                         <button onClick="fbShare()" class="invite-item" style="background: #103d99;"><i class="fa fa-facebook"></i></button>
+                         <button  onClick="whatsappShare()" class="invite-item" style="background: linear-gradient(#32b221,#24a316);"><i class="fa fa-whatsapp"></i></button>
+                         <button onClick="twitterShare()" class="invite-item" style="background: linear-gradient(#5bbfdb,#82d1e7);"><i class="fa fa-twitter"></i></button>
+                         <button onClick="otherShare()" class="invite-item" style="background: #ffc107;"><i style="color:black" class="fa fa-pencil"></i></button>
+                       </ul>
+                    </div>
+                  </div>
+                </div>
+              
+    </div>
+    <script src="js/slim.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="index.js"></script> 
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="main.js"></script>
+    <script>
+      window.onload = function () {
+        if (window.AdMob) AdMob.showInterstitial();
+        window.onbeforeunload = function () {
+          if (window.AdMob) AdMob.showInterstitial();
+        };
+      }
+    </script>
+  </body>
+</html>

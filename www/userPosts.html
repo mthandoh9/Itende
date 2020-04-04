@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src *  'unsafe-inline'; script-src *  'unsafe-inline'; media-src *">
+    <meta name="viewport"
+        content="initial-scale=1,user-scalable=no, width=device-width, height=device-height, viewport-fit=cover">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="mainStyle.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.mobile.theme-1.4.5.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.mobile.icons-1.4.5.min.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.mobile.structure-1.4.5.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>
+    <style>
+        .userPosts {
+            margin-top: 10px;
+            border: 1px solid black;
+            border-radius: 5px;
+            padding: 3px;
+            box-shadow: 2px 2px 2px #5e5e5e;
+
+            white-space: pre-wrap;
+            /* CSS3 */
+            white-space: -moz-pre-wrap;
+            /* Firefox */
+            white-space: -pre-wrap;
+            /* Opera <7 */
+            white-space: -o-pre-wrap;
+            /* Opera 7 */
+            word-wrap: break-word;
+            /* IE */
+        }
+
+        .postMessage {
+
+            width: 100%;
+            overflow-y: scroll;
+            height: 230px;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* The Modal (background) */
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            padding-top: 100px;
+            /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0);
+            /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 99%;
+            height: 347px;
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-warning text-dark" id="navbar">
+            <a class="navbar-brand text-dark" href="javascript:history.go(-1)"><i class="fa fa-angle-left fa-lg"></i><b>
+                    <labe id="subTop" class="text-center">Wall</labe>
+                </b></a>
+            <button class="navbar-toggler" onclick="menu()" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse" style="margin-top: 10px;">
+                <ul class="navbar-nav mr-auto">
+                    <li><a class="nav-item" href="DownloadBeats.html">Beats <i class="fa fa-arrow-circle-down"></i></a>
+                    </li>
+                    <li><a class="nav-item" href="downloadFiles.html">Files <i class="fa fa-arrow-circle-down"></i></a>
+                    </li>
+                    <li><a class="nav-item" href="TempoChanger.html">TempoChanger <i
+                                class="fa fa-play-circle-o"></i></a></li>
+                    <li><a class="nav-item" href="tutorials.html">Tutorials <i class="fa fa-youtube-play"></i></a></li>
+                    <li><a class="nav-item" id="share" href="#share">Share <i class="fa fa-share-alt"></i></a></li>
+                    <li><a class="nav-item" id="logout" onclick="logout()">Logout <i class="fa fa-sign-out"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div id="section1" class="container-fluid">
+        <a id="myBtn" class="btn btn-sm btn-warning">Create Post <i class="fa fa-newspaper-o"></i></a>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div class="col-sm-12">
+                    <textarea type="text" id="postMessage" placeholder="Text..." class="postMessage" maxlength="500">
+                    </textarea>
+                </div>
+                <div class="col-sm-4">
+                    <a id="post" class="btn btn-md btn-warning" onclick="postMessage()">Post <i
+                            class="fa fa-send"></i></a>
+                </div>
+            </div>
+        </div>
+        <div id="root">
+            <center><img src="img/loading.gif" id="loading" /></center>
+        </div>
+    </div>
+    <div id="overlay-invite">
+        <div class="invite">
+            <div class="invite-content">
+                <ul class="invite-list">
+                    <button onClick="fbShare()" class="invite-item" style="background: #103d99;"><i
+                            class="fa fa-facebook"></i></button>
+                    <button onClick="whatsappShare()" class="invite-item"
+                        style="background: linear-gradient(#32b221,#24a316);"><i class="fa fa-whatsapp"></i></button>
+                    <button onClick="twitterShare()" class="invite-item"
+                        style="background: linear-gradient(#5bbfdb,#82d1e7);"><i class="fa fa-twitter"></i></button>
+                    <button onClick="otherShare()" class="invite-item" style="background: #ffc107;">
+                        <i style="color:black" class="fa fa-pencil"></i></button>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="js/slim.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/moment.js"></script>
+    <script type="text/javascript">
+
+        document.addEventListener("offline", onOffline, false);
+
+        function onOffline() {
+            window.plugins.toast.showLongBottom('NO INTERNET CONNECTION!', function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+            $('#loading').hide();
+            return;
+        }
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("myBtn");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal 
+        btn.onclick = function () {
+            modal.style.display = "block";
+            $('#postMessage').val("");
+            $('#post').html("Post");
+            window.localStorage.setItem("IdUpdate", "");
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+
+        }
+
+
+        function deletePost(x) {
+            if (window.confirm("Are you sure ?")) {
+                event.preventDefault();
+                $.ajax({
+                    url: "https://techforest.co.za/Itende/deletePost.php",
+                    method: "POST",
+                    data: { postID: x },
+                    dataType: "json",
+                    success: function (mess) {
+
+                        // alert(mess.resMess);
+                        window.plugins.toast.showLongBottom(mess.resMess, function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+
+                        window.location.reload();
+                    },
+                    error: function (err) {
+
+                    }
+                });
+            }
+        }
+        function alphaOnly(event) {
+            var key = event.keyCode;
+            return ((key >= 65 && key <= 90) || key == 8);
+        }
+        function validateEmail(email) {
+            var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(email);
+        }
+        function logout() {
+            if (window.confirm("Are you sure?")) {
+                window.localStorage.clear();
+                window.location.href = "login.html";
+                window.plugins.toast.showLongBottom("Logged Out", function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+            }
+        }
+        var usersposts = [];
+        window.onload = function () {
+            var email = window.localStorage.getItem("userEmail");
+            if (email == null || email == undefined || email == "") {
+                window.location.href = "index.html";
+
+            }
+            $('#logout').css("color", "red");
+            var vNumberToVerify = $("#verification").val();
+            event.preventDefault();
+            $.ajax({
+                url: "https://techforest.co.za/Itende/getPosts.php",
+                method: "POST",
+                data: null,
+                dataType: "json",
+                success: function (mess) {
+                    console.log(mess);
+                    if (mess.length == 0) {
+                        $('#loading').hide();
+                        return;
+                    }
+
+                    usersposts = mess;
+                    var posts = "";
+                    var admin = "mthandoh9@gmail.com";
+                    for (var x = 0; x < mess.length; x++) {
+                        posts += "<div class='userPosts' id='" + mess[x].Id + "'><b>" + mess[x].Name + " " + mess[x].Surname + "</b></br>";
+                        posts += "<p>" + mess[x].postMessage + "</p>";
+                        if (mess[x].Email != email && email == admin) {
+                            //Admin
+                            // posts += "<a style='margin-left:5px;' onclick='editPost(" + mess[x].Id + ")'><i class='fa fa-pencil' style='margin-right:20px;'></i></a>";
+                            posts += "<a onclick='deletePost(" + mess[x].Id + ")'><i class='fa fa-trash'></i></a>";
+
+                        }
+                        if (mess[x].Email == email) {
+                            posts += "<a style='margin-left:5px;' onclick='editPost(" + mess[x].Id + ")'><i class='fa fa-pencil' style='margin-right:20px;'></i></a>";
+                            posts += "<a onclick='deletePost(" + mess[x].Id + ")'><i class='fa fa-trash'></i></a>";
+                        }
+                       
+                        var date = new Date(mess[x].Date);
+                        var now = new Date();
+                        const date1 = new Date(mess[x].Date);
+                        const date2 = new Date();
+                        
+                        const diffTime = Math.abs(date2 - date1);
+                        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                        console.log(diffDays);
+                        
+                        var datrr = moment(date).fromNow();
+                        var date2v = moment(date).calendar();
+
+                        if (diffDays > 3) {
+                            posts += "<label style='margin-left:10px;'> Posted: " + date2v + "</label>";
+
+                        } else if(diffDays < 3 && diffDays>1) {
+                            posts += "<label style='margin-left:10px;'> Posted: " + date2v + "</label>";
+                        }else{
+                            posts += "<label style='margin-left:10px;'> Posted: " + datrr + "</label>";
+                        }
+                        //     }
+                        posts += "</div>";
+                    }
+                    document.getElementById("root").innerHTML = posts;
+                    $('#loading').hide();
+                },
+                error: function (err) {
+                    window.plugins.toast.showLongBottom(err.responseText, function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+                    $('#loading').hide();
+                }
+            });
+        }
+        var isUpdate = false;
+
+        function editPost(x) {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "block";
+            var postMess = findpost(x, usersposts);
+            $('#postMessage').val(postMess);
+            $('#post').html("Update");
+            isUpdate = true;
+            
+            window.localStorage.setItem("IdUpdate", x);
+        }
+
+        function findpost(x, arr) {
+            var res = "";
+            for (var d = 0; d < arr.length; d++) {
+                if (arr[d].Id == x)
+                    res = arr[d].postMessage;
+            }
+            return res;
+        }
+        function postMessage() {
+            $('#post').addClass('disabled');
+            var idUpdate = 0;
+            var getID = window.localStorage.getItem("IdUpdate");
+            if (getID != null) {
+                idUpdate = getID;
+            }
+            var email = window.localStorage.getItem("userEmail");
+            var postMessage = $('#postMessage').val();
+            if (postMessage != "") {
+                //console.log(idUpdate);
+                event.preventDefault();
+                $.ajax({
+                    url: "https://techforest.co.za/Itende/posting.php",
+                    method: "POST",
+                    data: { Id: idUpdate, postMessage: postMessage, Email: email },
+                    dataType: "json",
+                    success: function (mess) {
+                        idUpdate = 0;
+                        //alert(mess.resMess);
+                        window.plugins.toast.showLongBottom(mess.resMess, function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+                        window.localStorage.setItem("IdUpdate", "");
+                        window.location.reload();
+                    },
+                    error: function (err) {
+                        //alert(err.responseText);
+                        window.plugins.toast.showLongBottom(err.responseText, function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+
+                    }
+                });
+            } else {
+                window.plugins.toast.showShortTop('Write Something before posting!', function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) })
+                //window.plugins.toast.showLongBottom(mess.resMess, function(a){console.log('toast success: ' + a)}, function(b){alert('toast error: ' + b)});
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title></title>
+  <meta name="viewport"
+    content="initial-scale=1,user-scalable=no, width=device-width, height=device-height, viewport-fit=cover">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="mainStyle.css">
+  <link rel="stylesheet" type="text/css" href="css/jquery.mobile.theme-1.4.5.css">
+  <link rel="stylesheet" type="text/css" href="css/jquery.mobile.icons-1.4.5.min.css">
+  <link rel="stylesheet" type="text/css" href="css/jquery.mobile.structure-1.4.5.css">
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>
+  <style>
+    .nav-item {
+      margin-top: -70px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-warning text-dark" id="navbar">
+      <a class="navbar-brand text-dark" href="javascript:history.go(-1)"><i class="fa fa-angle-left fa-lg"></i>
+        <b><labe id="subTop" class="text-center">TempoChanger</labe></b><i class="fa fa-play-circle-o"></i>
+      </a>
+      <button class="navbar-toggler" onclick="menu()" type="button">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse" style="margin-top: 10px;">
+        <ul class="navbar-nav mr-auto">
+          <li><a class="nav-item" href="DownloadBeats.html">Beats <i class="fa fa-arrow-circle-down"></i></a></li>
+          <li><a class="nav-item" href="downloadFiles.html">Files <i class="fa fa-arrow-circle-down"></i></a></li>
+          <li><a class="nav-item" href="TempoChanger.html">TempoChanger <i class="fa fa-play-circle-o"></i></a></li>
+          <li><a class="nav-item" href="tutorials.html">Tutorials <i class="fa fa-youtube-play"></i></a></li>
+          <li><a class="nav-item" id="share" href="#share">Share <i class="fa fa-share-alt"></i></a></li>
+          <li><a class="nav-item" href="about.html">About <i class="fa fa-info-circle"></i></a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3 offset-md-4" id="root">
+        <div class="TempoChangerDiv" style="margin-top:70px;">
+          <center>
+            <h1 id="fileName"></h1>
+            <input type="file" id="myFileInput" />
+            <audio id="sound" style="color:goldenrod;" controls></audio>
+            <br>
+            <button class="btn btn-lg" id="play" style="font-size: 50pt;"><i class="fa fa-play-circle"></i></button>
+            <button class="btn btn-lg" id="stop" style="font-size: 50pt;"><i class="fa fa-pause"></i></button>
+            <br>
+            <h1>Tempo Control</h1>
+            <button id="tempoDown" class="btn btn-lg" style="font-size: 50pt;"><i class="fa fa-minus"></i></button>
+            <button id="tempoUp" class="btn btn-lg " style="font-size: 50pt;"><i class="fa fa-plus"></i></button>
+          </center>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="main.js"></script>
+  <script>
+    function byId(e) {
+      return document.getElementById(e);
+    }
+    window.addEventListener('load', onDocLoaded, false)
+    function onDocLoaded() {
+      byId('myFileInput').addEventListener("change", onChoosenFileChange, false);
+    }
+    function onChoosenFileChange(evt) {
+
+      var sound = document.getElementById("sound");
+      var fileType = this.files[0].type;
+
+      var path = URL.createObjectURL(this.files[0]);
+      sound.src = path;
+      sound.play();
+      $('play').hide();
+
+      var tempoUp = document.getElementById("tempoUp");
+      tempoUp.addEventListener("click", changeSpeedUp);
+
+      var tempoDown = document.getElementById("tempoDown");
+      tempoDown.addEventListener("click", changeSpeedDown);
+
+      var stop = document.getElementById("stop");
+      stop.addEventListener("click", stopPlay);
+
+      var play = document.getElementById("play");
+      play.addEventListener("click", Play);
+
+      var x = 1;
+      var normalRate = 1;
+      function stopPlay(event) {
+        byId('sound').pause();
+        $('play').show();
+      }
+      function Play(event) {
+        byId('sound').play();
+      }
+      function changeSpeedUp(event) {
+        var UpRate = x / 100;
+        var final_rate = normalRate + UpRate;
+        byId('sound').playbackRate = final_rate;
+        x++;
+      }
+      function changeSpeedDown(event) {
+        --x;
+        var DownRate = x / 100;
+        var final_rate = normalRate + DownRate;
+        byId('sound').playbackRate = final_rate;
+      }
+    }  
+  </script>
+</body>
+
+</html>
