@@ -1,0 +1,41 @@
+{
+  "project_info": {
+    "project_number": "740239092701",
+    "firebase_url": "https://itende-style-app.firebaseio.com",
+    "project_id": "itende-style-app",
+    "storage_bucket": "itende-style-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:740239092701:android:ee862c1ec40dda73",
+        "android_client_info": {
+          "package_name": "com.ItendeStyle.Itende"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "740239092701-2d1b175sm069eh01c3mlb0j6n0lsfdfi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgQLwWtvd2PwqfqEarSVPclDJ4t7vnUJQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "740239092701-2d1b175sm069eh01c3mlb0j6n0lsfdfi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-9845513592050657~6586378867"
+    }
+  ],
+  "configuration_version": "1"
+}

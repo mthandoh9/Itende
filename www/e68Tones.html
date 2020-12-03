@@ -25,12 +25,12 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarCollapse" style="margin-top: 10px;">
             <ul class="navbar-nav mr-auto">
-               <li><a class="nav-item" href="DownloadBeats.html">Beats <i class="fa fa-arrow-circle-down"></i></a></li> 
-               <li><a class="nav-item" href="downloadFiles.html">Files <i class="fa fa-arrow-circle-down"></i></a></li> 
-               <li><a class="nav-item" href="TempoChanger.html">TempoChanger <i class="fa fa-play-circle-o"></i></a></li> 
+               <!-- <li><a class="nav-item" href="DownloadBeats.html">Beats <i class="fa fa-arrow-circle-down"></i></a></li>  -->
+               <!-- <li><a class="nav-item" href="downloadFiles.html">Files <i class="fa fa-arrow-circle-down"></i></a></li>  --> 
+               <!-- <li><a class="nav-item" href="TempoChanger.html">TempoChanger <i class="fa fa-play-circle-o"></i></a></li>  --> 
                <li><a class="nav-item" href="tutorials.html">Tutorials <i class="fa fa-youtube-play"></i></a></li> 
                <li><a class="nav-item" id="share" href="#share">Share <i class="fa fa-share-alt"></i></a></li> 
-               <li><a class="nav-item" href="about.html">About <i class="fa fa-info-circle"></i></a></li> 
+               <!-- <li><a class="nav-item" href="about.html">About <i class="fa fa-info-circle"></i></a></li>  -->
             </ul>
           </div>
         </nav>
@@ -136,9 +136,30 @@
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/popper.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="index.js"></script> 
-    <script src="js/jquery-3.2.1.min.js"></script>
-    
+    <script type="text/javascript" src="index123.js"></script> 
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script>
+      window.onload = function () {
+  
+        if (localStorage.getItem("showOnload") != "false") {
+          if (window.AdMob) AdMob.showInterstitial();
+          var admobid = {};
+          admobid = {
+            banner: 'ca-app-pub-9845513592050657/2935628640',
+            interstitial: 'ca-app-pub-9845513592050657/6715338970'
+          };
+          if (window.AdMob) AdMob.prepareInterstitial({ adId: admobid.interstitial, autoShow: false });
+         
+  
+          localStorage.setItem("showOnload", "false");
+        } else {
+          localStorage.setItem("showOnload", "true");
+          window.onbeforeunload = function () {
+            if (window.AdMob) AdMob.showInterstitial();
+          };
+        }
+      }
+    </script>
     
   </body>
 </html>

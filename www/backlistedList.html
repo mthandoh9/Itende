@@ -1,0 +1,145 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title></title>
+
+    <meta name="viewport"
+        content="initial-scale=1,user-scalable=no, width=device-width, height=device-height, viewport-fit=cover">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="mainStyle.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.mobile.theme-1.4.5.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.mobile.icons-1.4.5.min.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.mobile.structure-1.4.5.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/angular.min.js"></script>
+    <style>
+        .downloadList {
+            margin: 10px 5px 10px 5px;
+            border: 1px solid lightgray;
+        }
+
+        .myblacklistcard {
+            font-family: Arial, Helvetica, sans-serif !important;
+            position: unset !important;
+            transform: none !important;
+            margin-top: -50px;
+            margin-bottom: 62px;
+        }
+    </style>
+    <!-- <script type="text/javascript" src="js/angular.min.js"></script> -->
+</head>
+
+<body ng-app="blacklistList">
+    <div class="container">
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-warning text-dark" id="navbar">
+            <a class="navbar-brand text-dark" href="javascript:history.go(-1)"><i class="fa fa-angle-left fa-lg"></i><b>
+                    <labe id="subTop" class="text-center">Sleazy Pastors & Churches</labe>
+                </b></a>
+
+        </nav>
+    </div>
+
+    <div class="container" ng-controller="myCtrl" style="margin-top: 110px !important;">
+        <label id="noNetwork" class="text text-center" style="color:red; display: none; margin-top: 70px;">No Internet
+            Connection!</label>
+        <a id="noNetworkBtn" onclick="window.location.reload()" class="btn btn-warning btn-sm"
+            style="display: none;margin-top: 50px;">Reload
+        </a>
+        <label id="noListAvalaible" class="text text-center" ng-if="blacklist.length==0" style=" margin-top: 70px;">List
+            Empty!</label>
+        <div class="card myblacklistcard" ng-repeat="x in blacklist" style="width: 100%; position: unset !important;">
+            <div class="card-header"><label>{{x.Name}} {{x.Surname}}</label></div>
+            <div class="card-body">
+                <label>ChurchName: {{x.ChurchName}}</label></br>
+                <label>City: {{x.City}}</label></br>
+                <label>Province: {{x.Province}}</label></br>
+                <p>Reasons: {{x.Reasons}}</p>
+            </div>
+            <div class="card-footer">
+                <a class="btn btn-danger" href="javascript:void(0)" ng-if="x.Reported_by==loggedUser"
+                    ng-click='removeRecord(x)'>Remove</a>
+            </div>
+        </div>
+    </div>
+    <script src="js/slim.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="main.js"></script>
+    <script src="js/downloaderService.js"></script>
+    <script>
+        var app = angular.module("blacklistList", []);
+        app.controller("myCtrl", function ($scope, $http) {
+
+            $scope.blacklist = [];
+            $scope.loggedUser = window.localStorage.getItem("userEmail");
+            $http({
+                method: "GET",
+                url: "https://techforest.co.za/Itende/getBlacklist.php"
+            }).then(function mySuccess(response) {
+                console.log(response.data)
+                $("#loading").hide();
+                //$scope.process(response.data);
+                $scope.blacklist = response.data;
+                // if ($scope.blacklist.length == 0) {
+                //     $("#noListAvalaible").show();
+                // }
+                // $scope.beats.splice(-1, 1);
+            }, function myError(response) {
+                $("#noNetwork").show();
+                $("#noNetworkBtn").show();
+                $("#loading").hide();
+                //$scope.myWelcome = response.statusText;
+            });
+            $scope.removeRecord = function (row) {
+
+                 var data= {
+                     Id:row.Id
+                 }
+                 console.log(data)
+                $.ajax({
+                    url: "https://techforest.co.za/Itende/removeFromBlacklist.php",
+                    method: "POST",
+                    data: data,
+                    dataType: "json",
+                    success: function (mess) {
+                        console.log(mess)
+                        var index = $scope.blacklist.indexOf(row);
+                        $scope.blacklist.splice(index, 1);
+                        window.plugins.toast.showLongBottom(mess.resMess, function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+                        //$scope.$digest();
+                    },
+                    error: function (err) {
+                        console.log(err)
+                        window.plugins.toast.showLongBottom(err.responseText, function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+                    }
+                });
+
+            }
+
+        });
+
+        document.addEventListener("offline", onOffline, false);
+        function onOffline() {
+            window.plugins.toast.showLongBottom('NO INTERNET CONNECTION!', function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+            $('#loading').hide();
+            return;
+        }
+        window.onload = function () {
+            if (localStorage.getItem("showOnload") == "true") {
+                if (window.AdMob) AdMob.showInterstitial();
+                event.preventDefault();
+                localStorage.setItem("showOnload", "false");
+            } else {
+                localStorage.setItem("showOnload", "true");
+            }
+        }
+    </script>
+</body>
+
+</html>

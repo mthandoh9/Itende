@@ -1,182 +1,1485 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from demos.creative-tim.com/paper-kit-2-pro/examples/login-page.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 25 Jun 2018 07:41:26 GMT -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<!-- /Added by HTTrack -->
 
 <head>
-  <title></title>
-  <meta name="viewport"
-    content="initial-scale=1,user-scalable=no, width=device-width, height=device-height, viewport-fit=cover">
-  <link rel="stylesheet" href="css/font-awesome.min.css">
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="mainStyle.css">
-  <link rel="stylesheet" type="text/css" href="css/jquery.mobile.theme-1.4.5.css">
-  <link rel="stylesheet" type="text/css" href="css/jquery.mobile.icons-1.4.5.min.css">
-  <link rel="stylesheet" type="text/css" href="css/jquery.mobile.structure-1.4.5.css">
-  <script type="text/javascript" src="js/jquery.js"></script>
-  <script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>
-  <style>
-  </style>
+    <meta charset="utf-8" />
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+        name='viewport' />
+    <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
+    <link rel="stylesheet" href="css/w3.css">
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/downloaderService.js"></script>
+    <script src="index123.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" /> -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="mainStyle.css">
+
+    <link rel="stylesheet" type="text/css" href="css/jquery.mobile.theme-1.4.5.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.mobile.icons-1.4.5.min.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.mobile.structure-1.4.5.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+
+
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/paper-kit.min89bf.css?v=2.2.1" rel="stylesheet" />
+    <link href="css/demo.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: white !important;
+            /* padding-top: 70px !important; */
+            /* margin:0px; */
+        }
+
+        .page-header,
+        .filter:after {
+            background-color: white !important;
+        }
+
+        .container {
+            /* remember to set a width */
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        .form-control:focus {
+            border-color: inherit;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
+
+        .card-title {
+            color: #000 !important;
+        }
+
+        .form-control[type=text],
+        #email,
+        #password,
+        #log_email,
+        #log_password,
+        #c_password {
+            border: none;
+            outline: none;
+            border-bottom: 2px solid #888 !important;
+            transition: .5s;
+            margin-top: 10px;
+        }
+
+        /* #email{
+            border: none;
+            outline: none;
+            border-bottom: 2px solid #888 !important;
+            transition: .5s;
+            margin-top: 10px;
+        } 
+        #password{
+            border: none;
+            outline: none;
+            border-bottom: 2px solid #888 !important;
+            transition: .5s;
+            margin-top: 10px;
+        }
+        #c_password{
+            border: none;
+            outline: none;
+            border-bottom: 2px solid #888 !important;
+            transition: .5s;
+            margin-top: 10px;
+        }*/
+
+        .searchformfld {
+            position: relative;
+            margin: 5px 0px;
+        }
+
+        .searchformfld label {
+            position: absolute;
+            padding-left: 10px;
+            top: 0px;
+            cursor: text;
+            color: #000;
+        }
+
+        .register-form .form-control {}
+
+        .card-register {
+            background-color: white;
+            /* margin-top: -50px; */
+        }
+
+        .searchformfld input:focus+label,
+        .searchformfld input:not(:placeholder-shown)+label {
+            opacity: 1;
+            transform: scale(.9) translateY(-130%) translateX(-25px);
+            color: #000;
+        }
+
+        .searchformfld input:focus,
+        #email:focus,
+        #password:focus,
+        #c_password:focus {
+            border-bottom: 1px solid #ffc107 !important;
+            /* // outline-color: #000; */
+        }
+
+        /* .searchformfld input {
+            width: 100%;
+            padding-left: 10px;
+        } */
+
+        .searchformfld label,
+        .searchformfld input {
+            transition: all 0.2s;
+            transition-timing-function: ease;
+            transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+            /* opacity: 0.5; */
+        }
+
+        .custom {
+            width: 20% !important;
+            height: 80px !important;
+            font-size: x-large !important;
+        }
+
+        /* .downloadcustom {
+            
+            
+        } */
+
+        .nav-spans {
+            margin-top: 29px;
+            margin-left: -27px;
+            /* right: inherit; */
+            position: absolute;
+            font-family: Arial, Helvetica, sans-serif !important;
+            font-size: large;
+        }
+
+        .nav-spans2 {
+            margin-top: 29px;
+            margin-left: -24px !important;
+            /* right: inherit; */
+            position: absolute;
+            font-family: Arial, Helvetica, sans-serif !important;
+            font-size: large;
+        }
+
+        .nav-spanstempo {
+            margin-top: 29px;
+            margin-left: -46px !important;
+            /* right: inherit; */
+            position: absolute;
+            font-family: Arial, Helvetica, sans-serif !important;
+            font-size: large;
+        }
+
+        .fa-icons {
+            color: black;
+            opacity: 0.7;
+            font-size: x-large;
+        }
+
+        .w3-container {
+            margin-top: 69px !important;
+            color: black !important;
+        }
+
+        .tabC {
+            /* color: white !important; */
+            opacity: 2;
+        }
+
+
+        .buttonTabs {
+            width: 50% !important;
+            margin-top: -24px;
+            height: 80px !important;
+            font-size: x-large !important;
+        }
+
+        .downloadsSection {
+            margin-top: 10px;
+            border-radius: 50px;
+            height: 50px;
+            /* position: unset !important; */
+            position: fixed !important;
+            margin-left: -18px;
+        }
+
+        .itendeAppColor,
+        .itendeAppColor:hover {
+            background-color: #ffc107 !important;
+            border-color: #ffc107 !important;
+        }
+
+        .tablink,
+        .tablink:active,
+        .tablink:focus,
+        .tablink:hover {
+            text-decoration: none;
+            background-color: #ffc107 !important;
+        }
+
+        .activetablink {
+
+            border-bottom: 12px solid #000 !important;
+        }
+
+        .cutomcard {
+
+            box-shadow: 0 0px 14px 2px rgba(0, 0, 0, .15) !important;
+            padding: 20px !important;
+            margin: -38px 0 70px !important;
+
+        }
+
+        .mycard {
+            box-shadow: 0px 2px 4px 4px lightgray;
+            font-family: Arial, Helvetica, sans-serif !important;
+            border-radius: 5px !important;
+            position: unset;
+            transform: none !important;
+        }
+
+        .mymenucard {
+            font-family: Arial, Helvetica, sans-serif !important;
+            position: unset !important;
+            transform: none !important;
+        }
+
+
+        /* .card:not(.card-plain):hover {
+            box-shadow: 0 12px 19px -7px rgba(0, 0, 0, .3);
+    transform: none;
+        } */
+
+        .mydownloadscard {
+            font-family: Arial, Helvetica, sans-serif !important;
+            position: unset !important;
+            transform: none !important;
+            margin-top: -50px;
+            margin-bottom: 62px;
+        }
+
+        .customTutorials {
+            font-family: Arial, Helvetica, sans-serif !important;
+            position: unset !important;
+            transform: none !important;
+        }
+
+        .cardOptions,
+        .cardOptions:focus {
+            text-decoration: none;
+            color: black;
+            width: 30%;
+            border: 1px solid lightgray;
+            padding: 5px;
+            box-shadow: 1px 2px 1px 0px lightgray;
+            margin-left: 4px;
+            background-color: white !important;
+        }
+
+        .mycardfooter {
+            margin-top: -17px;
+            border-radius: 0% !important;
+        }
+
+        .keyboardNames {
+
+            font-size: large;
+            font-weight: bold;
+        }
+
+        .loginTabBtn:focus {
+
+            background-color: #ffc107 !important;
+        }
+
+        .keyboardCardheader {
+            padding: 10px 0px 2px 0px;
+            background-color: #ffc107 !important;
+        }
+
+        #overlay-invite {
+            margin-top: 72px !important;
+        }
+
+        .mainMenu {
+            position: fixed !important;
+
+        }
+
+        .myVids {
+            position: unset !important;
+        }
+
+        .userLoginHeader {
+            min-height: 50% !important;
+        }
+
+        .footerBtn {
+            margin-top: 10px;
+        }
+
+        @media screen and (max-width: 991px) {
+            .wrapper {
+                transition: all .33s cubic-bezier(.685, .0473, .346, 1);
+                left: 0;
+                background-color: #fff;
+                margin-top: 17px;
+                margin-left: 0px;
+            }
+
+            .login-page.full-screen .page-header .container {
+                margin-top: 2%;
+            }
+
+            .mydownloadscard:hover {
+                font-family: Arial, Helvetica, sans-serif !important;
+                position: unset !important;
+                transform: none !important;
+            }
+
+            .mymenucard {
+                font-family: Arial, Helvetica, sans-serif !important;
+                position: unset !important;
+                transform: none !important;
+            }
+
+        }
+    </style>
+
 </head>
 
-<body>
-  <div class="container">
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-warning text-dark" id="navbar">
-      <a id="appName" class="navbar-brand text-dark" href="index.html">Itende App</a>
-      <button class="navbar-toggler" onclick="menu()" type="button">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse" style="margin-top: 10px;">
-        <ul class="navbar-nav mr-auto">
-          <li><a class="nav-item" href="DownloadBeats.html">Beats <i class="fa fa-arrow-circle-down"></i></a></li>
-          <li><a class="nav-item" href="downloadFiles.html">Files <i class="fa fa-arrow-circle-down"></i></a></li>
-          <li><a class="nav-item" href="TempoChanger.html">TempoChanger <i class="fa fa-play-circle-o"></i></a></li>
-          <li><a class="nav-item" href="tutorials.html">Tutorials <i class="fa fa-youtube-play"></i></a></li>
-          <li><a class="nav-item" href="signup.html">Sign Up <i class="fa fa-user"></i></a></li>
-          <li><a class="nav-item" href="login.html">Login <i class="fa fa-sign-in"></i></a></li>
-        </ul>
-      </div>
-    </nav>
-  </div>
+<body class="login-page full-screen sidebar-collapse" ng-app="myBeatList">
+    <div class="w3-bar w3-yellow mainMenu itendeAppColor" style="height: 70px;">
 
-  <div id="section1" class="container-fluid">
-    <div class="row">
-      <div class="col-md-3  offset-md-4">
-        <!-- <div id="menu" >
-            <a class="btn btn-lg  btn-block btn-warning" id="showkeyboards">Keyboard Settings</a>
-            <a class="btn btn-lg  btn-block btn-warning" href="login.html" >Login</a>
-            <a class="btn btn-lg  btn-block btn-warning" href="signup.html">Sign Up</a>
-        </div>
-        <div id="settings" style="display:none;"> -->
-        <a id="E9" href="e09.html" style="text-decoration:none; color:black;"> <button
-            class="btn btn-lg btn-warning btn-block ">Roland E-09 </button></a>
-        <!--<a href="#" style="text-decoration:none; color:white;"><button class="btn btn-lg btn-secondary btn-block " >Roland E-12 </button></a>-->
-        <a href="e14.html" style="text-decoration:none; color:black;  margin-top: 10px;"><button
-            class="btn btn-lg btn-secondary btn-block " style="margin-top: 1px;">Roland E-14 </button></a>
-        <a href="e15.html" style="text-decoration:none; color:white;"><button class="btn btn-lg btn-warning btn-block "
-            style="margin-top: 1px;">Roland E-15</button></a>
-        <a href="e16.html" style="text-decoration:none; color:black;"><button
-            class="btn btn-lg btn-secondary btn-block " style="margin-top: 1px;">Roland E-16</button> </a>
-        <!-- <a href="e20.html" style="text-decoration:none; color:white;"><button class="btn btn-lg btn-warning btn-block " style="margin-top: 1px;" >Roland E-20</button> </a>  -->
-        <a href="e28.html" style="text-decoration:none; color:black;"><button class="btn btn-lg btn-warning btn-block "
-            style="margin-top: 1px;">Roland E-28</button></a>
-        <a href="e35.html" style="text-decoration:none; color:white;"><button
-            class="btn btn-lg btn-secondary btn-block ">Roland E-35</button> </a>
-        <a href="e36.html" style="text-decoration:none; color:black;"><button class="btn btn-lg btn-warning btn-block "
-            style="margin-top: 1px;">Roland E-36</button> </a>
-        <a href="e38.html" style="text-decoration:none; color:white;"><button
-            class="btn btn-lg btn-secondary btn-block " style="margin-top: 1px;">Roland E-38</button></a>
-        <!-- <a href="#" style="text-decoration:none; color:white;"><button disabled class="btn btn-lg btn-warning btn-block " >Roland E-50 </button></a> -->
-        <a href="e56.html" style="text-decoration:none; color:black;"><button class="btn btn-lg btn-warning btn-block "
-            style="margin-top: 1px;">Roland E-56 </button></a>
-        <a href="e60.html" style="text-decoration:none; color:white;"><button
-            class="btn btn-lg btn-secondary btn-block " style="margin-top: 1px;">Roland E-60 </button></a>
-        <a href="e66.html" style="text-decoration:none; color:black;"><button class="btn btn-lg btn-warning btn-block "
-            style="margin-top: 1px;">Roland E-66 </button></a>
-        <a href="e68.html" style="text-decoration:none; color:white;"><button
-            class="btn btn-lg btn-secondary btn-block ">Roland E-68 </button></a>
-        <a href="e86.html" style="text-decoration:none; color:black;"><button class="btn btn-lg btn-warning btn-block "
-            style="margin-top: 1px;">Roland E-86</button></a>
-        <a href="e96.html" style="text-decoration:none; color:white;"> <button
-            class="btn btn-lg btn-secondary btn-block ">Roland E-96</button></a>
-        <a href="e300.html" style="text-decoration:none; color:black;"><button class="btn btn-lg btn-warning btn-block "
-            style="margin-top: 1px;">Roland E-300</button></a>
-        <a href="e500.html" style="text-decoration:none; color:white;"><button
-            class="btn btn-lg btn-secondary btn-block " style="margin-top: 1px;">Roland E-500</button></a>
-        <a href="Exr3.html" style="text-decoration:none; color:black;"><button
-            class="btn btn-lg btn-warning btn-block ">Roland EXR-3s </button></a>
-        <a href="Exr5s.html" style="text-decoration:none; color:black;"><button
-            class="btn btn-lg btn-secondary btn-block ">Roland EXR-5s </button></a>
-        <a href="bk3.html" style="text-decoration:none; color:black;"><button
-            class="btn btn-lg btn-warning btn-block ">Roland BK-3</button></a>
-        <a href="bk5.html" style="text-decoration:none; color:black;"><button
-            class="btn btn-lg btn-secondary btn-block ">Roland BK-5</button></a>
-        <a href="gw8.html" style="text-decoration:none; color:black;"><button
-            class="btn btn-lg btn-warning btn-block ">Roland GW8</button></a>
-        <a href="mc780.html" style="text-decoration:none; color:white;"><button
-            class="btn btn-lg btn-secondary btn-block " style="margin-top: 1px;">Medeli MC 780 </button></a>
-        
-      </div>
+        <a class="w3-bar-item w3-button custom tablink activetablink" href="javascript:void(0)" id="homeTab"
+            onclick="openTab(this,'home')">
+            <i id="homeI" class="fa fa-home fa-icons tabC" style="color:black;font-size: x-large;"></i>
+            <span class="nav-spans">Home</span>
+        </a>
+        <a class="w3-bar-item w3-button custom tablink" href="javascript:void(0)" id="filesTab"
+            onclick="openTab(this,'files')">
+            <i id="downloadsI" class="fa fa-cloud-download fa-icons"></i>
+            <span class="nav-spans">Files</span>
+        </a>
+        <a class="w3-bar-item w3-button custom tablink" id="tutorialsTab" onclick="openTab(this,'tutorials')">
+            <i class="fa fa-youtube-play fa-icons " style="color:black;font-size: x-large;"></i>
+            <span class="nav-spans">Learn</span>
+        </a>
+        <a class="w3-bar-item w3-button custom tablink" id="userTab" href="javascript:void(0)"
+            onclick="openTab(this,'user')">
+            <i class="fa fa-user fa-icons" style="color:black;font-size: x-large;"></i>
+            <span class="nav-spans">Login</span>
+        </a>
+        <a class="w3-bar-item w3-button custom tablink" id="menuTab" href="javascript:void(0)"
+            onclick="openTab(this,'menu')">
+            <i class="fa fa-bars fa-icons" style="color:black;font-size: x-large;"></i>
+            <span class="nav-spans">Menu</span>
+        </a>
+
     </div>
-
-    <div id="overlay-invite">
-      <div class="invite">
-        <div class="invite-content">
-          <ul class="invite-list">
-            <button id="fb" onClick="fbShare()" class="invite-item" style="background: #103d99;"><i
-                class="fa fa-facebook"></i></button>
-            <button onClick="whatsappShare()" class="invite-item"
-              style="background: linear-gradient(#32b221,#24a316);"><i class="fa fa-whatsapp"></i></button>
-            <button onClick="twitterShare()" class="invite-item"
-              style="background: linear-gradient(#5bbfdb,#82d1e7);"><i class="fa fa-twitter"></i></button>
-            <button onClick="otherShare()" class="invite-item" style="background: #ffc107;"><i style="color:black"
-                class="fa fa-pencil"></i></button>
-          </ul>
+    <div id="home" class="w3-container city">
+        <h3>Keyboad Settings</h3>
+        <div class="card text-center mycard">
+            <div class="card-header bg-warning keyboardCardheader">
+                <label class="text-center keyboardNames">Roland E-09</label>
+            </div>
+            <div class="card-footer mycardfooter">
+                <div class="row footerBtn">
+                    <a href="e09Tones.html" class="btn cardOptions" style="margin-left: 10px !important;">Tones</a>
+                    <a href="e09Beats.html" class="btn cardOptions">Beats</a>
+                    <a href="javascript:void(0)" onclick="notAvailable()" class="btn cardOptions">Setup</a>
+                </div>
+            </div>
         </div>
-      </div>
+        <div class="card text-center mycard">
+            <div class="card-header bg-warning keyboardCardheader">
+                <label class="text-center keyboardNames">Roland E-14</label>
+            </div>
+            <div class="card-footer mycardfooter">
+                <div class="row footerBtn">
+                    <a href="e14Tones.html" class="btn cardOptions" style="margin-left: 10px !important;">Tones</a>
+                    <a href="e14Beats.html" class="btn cardOptions">Beats</a>
+                    <a href="javascript:void(0)" onclick="notAvailable()" class="btn cardOptions">Setup</a>
+                </div>
+            </div>
+        </div>
+        <div class="card text-center mycard">
+            <div class="card-header bg-warning keyboardCardheader">
+                <label class="text-center keyboardNames">Roland E-15</label>
+            </div>
+            <div class="card-footer mycardfooter">
+                <div class="row footerBtn">
+                    <a href="e15Tones.html" class="btn cardOptions" style="margin-left: 10px !important;">Tones</a>
+                    <a href="e15Beats.html" class="btn cardOptions">Beats</a>
+                    <a href="javascript:void(0)" onclick="notAvailable()" class="btn cardOptions">Setup</a>
+                </div>
+            </div>
+        </div>
+        <div class="card text-center mycard">
+            <div class="card-header bg-warning keyboardCardheader">
+                <label class="text-center keyboardNames">Roland E-16</label>
+            </div>
+            <div class="card-footer mycardfooter">
+                <div class="row footerBtn">
+                    <a href="e16Tones.html" class="btn cardOptions" style="margin-left: 10px !important;">Tones</a>
+                    <a href="e16Beats.html" class="btn cardOptions">Beats</a>
+                    <a href="javascript:void(0)" onclick="notAvailable()" class="btn cardOptions">Setup</a>
+                </div>
+            </div>
+        </div>
+        <div class="card text-center mycard">
+            <div class="card-header bg-warning keyboardCardheader">
+                <label class="text-center keyboardNames">Roland E-28</label>
+            </div>
+            <div class="card-footer mycardfooter">
+                <div class="row footerBtn">
+                    <a href="e28Tones.html" class="btn cardOptions" style="margin-left: 10px !important;">Tones</a>
+                    <a href="e28Beats.html" class="btn cardOptions">Beats</a>
+                    <a href="javascript:void(0)" onclick="notAvailable()" class="btn cardOptions">Setup</a>
+                </div>
+            </div>
+        </div>
+        <div class="card text-center mycard">
+            <div class="card-header bg-warning keyboardCardheader">
+                <label class="text-center keyboardNames">Roland E-35</label>
+            </div>
+            <div class="card-footer mycardfooter">
+                <div class="row footerBtn">
+                    <a href="e35Tones.html" class="btn cardOptions" style="margin-left: 10px !important;">Tones</a>
+                    <a href="e35Beats.html" class="btn cardOptions">Beats</a>
+                    <a href="javascript:void(0)" onclick="notAvailable()" class="btn cardOptions">Setup</a>
+                </div>
+            </div>
+        </div>
+        <div class="card text-center mycard">
+            <div class="card-header bg-warning keyboardCardheader">
+                <label class="text-center keyboardNames">Roland E-36</label>
+            </div>
+            <div class="card-footer mycardfooter">
+                <div class="row footerBtn">
+                    <a href="e36Tones.html" class="btn cardOptions" style="margin-left: 10px !important;">Tones</a>
+                    <a href="e36Beats.html" class="btn cardOptions">Beats</a>
+                    <a href="javascript:void(0)" onclick="notAvailable()" class="btn cardOptions">Setup</a>
+                </div>
+            </div>
+        </div>
+        <div class="card text-center mycard">
+            <div class="card-header bg-warning keyboardCardheader">
+                <label class="text-center keyboardNames">Roland E-38</label>
+            </div>
+            <div class="card-footer mycardfooter">
+                <div class="row footerBtn">
+                    <a href="e38Tones.html" class="btn cardOptions" style="margin-left: 10px !important;">Tones</a>
+                    <a href="e38Beats.html" class="btn cardOptions">Beats</a>
+                    <a href="javascript:void(0)" onclick="notAvailable()" class="btn cardOptions">Setup</a>
+                </div>
+            </div>
+        </div>
+        <div class="card text-center mycard">
+            <div class="card-header bg-warning keyboardCardheader">
+                <label class="text-center keyboardNames">Roland E-56</label>
+            </div>
+            <div class="card-footer mycardfooter">
+                <div class="row footerBtn">
+                    <a href="e56Tones.html" class="btn cardOptions" style="margin-left: 10px !important;">Tones</a>
+                    <a href="e56Beats.html" class="btn cardOptions">Beats</a>
+                    <a href="javascript:void(0)" onclick="notAvailable()" class="btn cardOptions">Setup</a>
+                </div>
+            </div>
+        </div>
+        <div class="card text-center mycard">
+            <div class="card-header bg-warning keyboardCardheader">
+                <label class="text-center keyboardNames">Roland E-66</label>
+            </div>
+            <div class="card-footer mycardfooter">
+                <div class="row footerBtn">
+                    <a href="e66Tones.html" class="btn cardOptions" style="margin-left: 10px !important;">Tones</a>
+                    <a href="e66Beats.html" class="btn cardOptions">Beats</a>
+                    <a href="javascript:void(0)" onclick="notAvailable()" class="btn cardOptions">Setup</a>
+                </div>
+            </div>
+        </div>
+        <div class="card text-center mycard">
+            <div class="card-header bg-warning keyboardCardheader">
+                <label class="text-center keyboardNames">Roland E-68</label>
+            </div>
+            <div class="card-footer mycardfooter">
+                <div class="row footerBtn">
+                    <a href="e68Tones.html" class="btn cardOptions" style="margin-left: 10px !important;">Tones</a>
+                    <a href="e68Beats.html" class="btn cardOptions">Beats</a>
+                    <a href="javascript:void(0)" onclick="notAvailable()" class="btn cardOptions">Setup</a>
+                </div>
+            </div>
+        </div>
+        <div class="card text-center mycard">
+            <div class="card-header bg-warning keyboardCardheader">
+                <label class="text-center keyboardNames">Roland E-86</label>
+            </div>
+            <div class="card-footer mycardfooter">
+                <div class="row footerBtn">
+                    <a href="e86Tones.html" class="btn cardOptions" style="margin-left: 10px !important;">Tones</a>
+                    <a href="e86Beats.html" class="btn cardOptions">Beats</a>
+                    <a href="javascript:void(0)" onclick="notAvailable()" class="btn cardOptions">Setup</a>
+                </div>
+            </div>
+        </div>
+        <div class="card text-center mycard">
+            <div class="card-header bg-warning keyboardCardheader">
+                <label class="text-center keyboardNames">Roland E-300</label>
+            </div>
+            <div class="card-footer mycardfooter">
+                <div class="row footerBtn">
+                    <a href="e300Tones.html" class="btn cardOptions" style="margin-left: 10px !important;">Tones</a>
+                    <a href="e300Beats.html" class="btn cardOptions">Beats</a>
+                    <a href="javascript:void(0)" onclick="notAvailable()" class="btn cardOptions">Setup</a>
+                </div>
+            </div>
+        </div>
+        <div class="card text-center mycard">
+            <div class="card-header bg-warning keyboardCardheader">
+                <label class="text-center keyboardNames">Roland E-500</label>
+            </div>
+            <div class="card-footer mycardfooter">
+                <div class="row footerBtn">
+                    <a href="e500Tones.html" class="btn cardOptions" style="margin-left: 10px !important;">Tones</a>
+                    <a href="e500Beats.html" class="btn cardOptions">Beats</a>
+                    <a href="javascript:void(0)" onclick="notAvailable()" class="btn cardOptions">Setup</a>
+                </div>
+            </div>
+        </div>
+        <div class="card text-center mycard">
+            <div class="card-header bg-warning keyboardCardheader">
+                <label class="text-center keyboardNames">Roland Exr3</label>
+            </div>
+            <div class="card-footer mycardfooter">
+                <div class="row footerBtn">
+                    <a href="Exr3Tones.html" class="btn cardOptions" style="margin-left: 10px !important;">Tones</a>
+                    <a href="Exr3Beats.html" class="btn cardOptions">Beats</a>
+                    <a href="javascript:void(0)" onclick="notAvailable()" class="btn cardOptions">Setup</a>
+                </div>
+            </div>
+        </div>
+        <div class="card text-center mycard">
+            <div class="card-header bg-warning keyboardCardheader">
+                <label class="text-center keyboardNames">Roland Exr5s</label>
+            </div>
+            <div class="card-footer mycardfooter">
+                <div class="row footerBtn">
+                    <a href="Exr5sTones.html" class="btn cardOptions" style="margin-left: 10px !important;">Tones</a>
+                    <a href="Exr3Beats.html" class="btn cardOptions">Beats</a>
+                    <a href="javascript:void(0)" onclick="notAvailable()" class="btn cardOptions">Setup</a>
+                </div>
+            </div>
+        </div>
+        <div class="card text-center mycard">
+            <div class="card-header bg-warning keyboardCardheader">
+                <label class="text-center keyboardNames">Medeli MC 780</label>
+            </div>
+            <div class="card-footer mycardfooter">
+                <div class="row footerBtn">
+                    <a href="mc780Tones.html" class="btn cardOptions" style="margin-left: 10px !important;">Tones</a>
+                    <a href="mc780Beats.html" class="btn cardOptions">Beats</a>
+                    <a href="javascript:void(0)" onclick="notAvailable()" class="btn cardOptions">Setup</a>
+                </div>
+            </div>
+        </div>
+
+
+
     </div>
-  </div>
-  <br>
-  <script src="js/slim.js"></script>
-  <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/popper.js"></script>
-  <script type="text/javascript" src="cordova.js"></script>
-  <script type="text/javascript" src="index.js"></script>
-  <script src="js/jquery-3.2.1.min.js"></script>
-  <script>
-    function onBackKeyDown() {
-      navigator.app.exitApp();
-    }
-    document.addEventListener("deviceready", onDeviceReady, false);
+    <!-- <div id="overlay-invite"> -->
+    <!-- <center><img src="img/loading.gif" id="loading" style="margin-top:100px; display: none;" /></center> -->
+    <!-- </div> -->
+    <div id="files" class="w3-container city" style="display:none">
+        <div class="w3-bar w3-border w3-card-4 w3-white downloadsSection" style="border-radius: 20px;">
+            <a class="w3-bar-item w3-button buttonTabs downloadtablink itendeAppColor" style="width: 50%;"
+                href="javascript:void(0)" onclick="openDownloadTab(event,'beats')">
+                <!-- <i class="fa fa-home fa-icons" style="color:black;font-size: x-large;"></i> -->
+                <span class="nav-spans">Beats</span>
+            </a>
+            <a class="w3-bar-item w3-button buttonTabs downloadtablink" style="width: 50%;" href="javascript:void(0)"
+                onclick="openDownloadTab(event,'dfiles')">
+                <!-- <i class="fa fa-cloud-download fa-icons"></i> -->
+                <span class="nav-spans">Files</span>
+            </a>
+        </div>
+        <center><img src="img/loading.gif" id="loading" style="margin-top:100px;" /></center>
+        <label id="noNetwork" class="text text-center" style="color:red; display: none; margin-top: 70px;">No Internet
+            Connection!</label>
+        <a id="noNetworkBtn" onclick="window.location.reload()" class="btn btn-warning btn-sm"
+            style="display: none;margin-top: 50px;">Reload
+        </a>
+        <div id="beats" ng-controller="myCtrl" class="w3-container dTab">
+            <!-- <label id="noNetwork" class="text text-center" style="color:red; display: none;">No Internet
+                Connection!</label> -->
+            <label id="fffff" style="margin-top: 50px;"></label>
+            <div class="card mydownloadscard" ng-repeat="x in beats" style="width: 100%; position: unset !important;">
+                <div class="card-header"><label>{{x.Name}}</label></div>
+                <div class="card-body">
+                    <label>Size: {{x.file_size}}</label></br>
+                    <label>File type: {{x.file_type}}</label></br>
+                    <label>Uploaded by: {{x.uploaded_by}}</label></br>
+                    <label>Uploaded on: {{x.Date}}</label>
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-info" href="javascript:void(0)" ng-click='dFile(x.link)'>Download</a>
+                </div>
+            </div>
+        </div>
+        <div id="dfiles" ng-controller="myCtrl2" class="w3-container dTab" style="display:none">
+            <!-- <label id="noNetwork" class="text text-center" style="color:red; display: none;">No Internet
+                Connection!</label> --><label id="fffff2" style="margin-top: 50px;"></label>
+            <div class="card mydownloadscard" ng-repeat="x in files" style="width: 100%;">
+                <div class="card-header"><label>{{x.Name}}</label></div>
+                <div class="card-body">
+                    <label>Size: {{x.file_size}}</label></br>
+                    <label>File type: {{x.file_type}}</label></br>
+                    <label>Uploaded by: {{x.uploaded_by}}</label></br>
+                    <label>Uploaded on: {{x.Date}}</label>
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-info" href="javascript:void(0)" ng-click='dFile(x.link)'>Download</a>
+                </div>
+            </div>
+        </div>
 
-    function adSetter() {
+    </div>
+    <div id="user" class="w3-container city" style="display:none">
+        <div class="wrapper">
+            <div class="page-header userLoginHeader"
+                style="background-image: url('../assets/img/sections/bruno-abatti.jpg');">
+                <div class="filter"></div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-sm-6 ml-auto mr-auto">
+                            <div class="w3-bar w3-border w3-card-4 w3-white" style="border-radius: 20px;">
+                                <a class="w3-bar-item w3-button logintablink itendeAppColor" href="javascript:void(0)"
+                                    style="width: 50% !important;" onclick="openUserTab(event,'LOGIN')">LOGIN</a>
+                                <a class="w3-bar-item w3-button logintablink" style="width: 50% !important;"
+                                    onclick="openUserTab(event,'SignUpDV')">SIGNUP</a>
 
-      var admobid = {};
-      if (/(android)/i.test(navigator.userAgent)) {
-        admobid = {
-          banner: 'ca-app-pub-9845513592050657/2935628640',
-          interstitial: 'ca-app-pub-9845513592050657/6715338970'
+                            </div>
+                            <div id="LOGIN" class="w3-container loginTab">
+                                <div class="card card-register cutomcard">
+                                    <h3 class="card-title">LOGIN</h3>
+                                    <form class="register-form">
+
+                                        <div class="form-group searchformfld">
+                                            <input type="email" class="form-control" name="log_email" placeholder=" "
+                                                id="log_email" maxlength="50" required />
+                                            <label for="log_email">Email</label>
+                                        </div>
+                                        <div class="form-group searchformfld">
+                                            <input type="password" class="form-control" name="log_password"
+                                                placeholder=" " id="log_password" maxlength="10" required />
+                                            <label for="log_password">Password</label>
+                                        </div>
+
+                                        <input type="submit" class="btn btn-warning btn-block btn-round"
+                                            name="log_submit" id="log_submit" value="LOGIN" />
+
+                                    </form>
+                                    <!-- <div class="forgot">
+                                        <a href="#paper-kit" class="btn btn-link btn-danger">Forgot password?</a>
+                                    </div> -->
+                                </div>
+                            </div>
+                            <div id="SignUpDV" class="w3-container loginTab" style="display:none">
+                                <div class="card card-register cutomcard">
+                                    <h3 class="card-title">SignUp</h3>
+                                    <form class="register-form">
+                                        <div class="form-group searchformfld">
+                                            <input type="text" class="form-control" maxlength="10" name="name" placeholder=" " onkeydown="Check(this)" onkeyup="Check(this)"
+                                                id="name"   required />
+                                            <label for="name">Name</label>
+                                        </div>
+                                        <div class="form-group searchformfld">
+                                            <input type="text" class="form-control" name="surname" maxlength="15" placeholder=" " onkeydown="Check(this)" onkeyup="Check(this)"
+                                                id="surname"   required />
+                                            <label for="surname">Surname</label>
+                                        </div>
+                                        <!-- pattern="^[a-zA-Z]*$" -->
+                                        <div class="form-group searchformfld">
+                                            <input type="email" class="form-control" name="email" placeholder=" "
+                                                id="email" maxlength="50" required />
+                                            <label for="email">Email</label>
+                                        </div>
+                                        <div class="form-group searchformfld">
+                                            <input type="password" class="form-control" name="password" placeholder=" "
+                                                id="password" maxlength="10" required />
+                                            <label for="password">Password</label>
+                                        </div>
+                                        <div class="form-group searchformfld">
+                                            <input type="password" class="form-control" name="c_password"
+                                                placeholder=" " id="c_password" maxlength="10" required />
+                                            <label for="c_password">Confirm Password</label>
+                                        </div>
+                                        <input type="submit" class="btn btn-warning btn-block btn-round" name="submit"
+                                            id="submit" value="Sign Up" />
+                                        <!-- <label>Email</label>
+                                        <input type="email" class="form-control no-border" placeholder="Email">
+                                        <label>Password</label>
+                                        <input type="password" class="form-control no-border" placeholder="Password"> -->
+                                        <!-- <button class="btn btn-danger btn-block btn-round">Login</button> -->
+                                    </form>
+                                    <!-- <div class="forgot">
+                                        <a href="#paper-kit" class="btn btn-link btn-danger">Forgot password?</a>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="demo-footer text-center">
+                            <h6>&copy;
+                                <script>
+                                    document.write(new Date().getFullYear())
+                                </script>, made with <i class="fa fa-heart heart"></i> by Creative Tim</h6>
+                        </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="tutorials" ng-controller="tutorialsCtrl" class="w3-container city" style="display:none">
+        <h3>Tutorials</h3>
+        <center><img src="img/loading.gif" id="loadingTutorials" style="margin-top:100px;" /></center>
+        <label id="noNetworkTutorials" class="text text-center" style="color:red; display: none;">No Internet
+            Connection!</label>
+        <a id="noNetworkTutorialsBtn" ng-click="reloadPage()" class="btn btn-warning btn-sm"
+            style="display: none;">Reload
+        </a>
+        <div class="card customTutorials" ng-repeat="x in tutorials" style="width: 100%;">
+            <div class="card-header">Title: <label>{{x.Title}}</label></div>
+            <div class="card-body">Description: {{x.Description}}</div>
+            <div class="card-footer"><a class="btn btn-info" href="javascript:void(0)"
+                    ng-click="watchTutorial(x.link)">Watch</a> </div>
+        </div>
+
+        <!-- <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3 offset-md-4 myVids" id="root">
+                    <div id="tutorialroot">
+
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+    <div id="menu" class="w3-container city" style="display:none">
+        <!-- <h2>Menu</h2> -->
+        <div class="container" style="margin-top: 20px;">
+            <div class="row">
+                <div class="card" style="width: 48%;">
+                    <div class="card-header"><label>Tempo Changer</label></div>
+                    <div class="card-body">Play mp3s</div>
+                    <div class="card-footer"><a class="btn btn-info" href="javascript:void(0)"
+                            onclick="gotoPage('TempoChanger.html','menu')">Launch Now</a> </div>
+                </div>
+                <div class="card mymenucard" style="width: 48%; margin-left:10px">
+                    <div class="card-header mymenucard">Trusted Stores <i class="fa fa-shopping-cart"></i></a></div>
+                    <div class="card-body mymenucard">Buy Music Instruments</div>
+                    <div class="card-footer mymenucard"><a class="btn btn-info" href="javascript:void(0)"
+                            onclick="gotoPage('RecommendedStore.html','menu')">View Stores</a></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card mymenucard" style="width: 48%;">
+                    <div class="card-header"><label>Trusted Sellers</label></div>
+                    <div class="card-body">These are trusted sellers of vintage & second hand Roland keyboards like
+                        E-500,E-300,E-68,E-38,E-28,E-16, E-09 and more.</div>
+                    <div class="card-footer"><a class="btn btn-info" href="javascript:void(0)"
+                            onclick="gotoPage('RolandSuppliers.html','menu')">View</a> </div>
+                </div>
+                <div class="card mymenucard" style="width: 48%; margin-left:10px">
+                    <div class="card-header">Blacklisted Pastors<i class="fa fa-ban"></i></a></div>
+                    <div class="card-body">List of untrustworthy Churches and Pastors that mistreat Singers and Players
+                    </div>
+                    <div class="card-footer"><a class="btn btn-info" href="#"
+                            onclick="gotoPage('backlistedList.html','menu')">View List</a></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    App v: <label id="versionNumber"></label>
+                </div>
+                <div class="col-sm-6">
+                    <a class="btn btn-success" href="#" onclick="gotoPlayStore()">Update</a></div>
+                </div>
+                
+                <!-- <div class="card mymenucard" style="width: 48%;">
+                    <div class="card-header"><label id="">App Version</label></div>
+                    <div class="card-body">App v: <label id="versionNumber"></label></div>
+                    <div class="card-footer"><a class="btn btn-info" href="#" onclick="gotoPlayStore()">Update</a></div>
+                </div> -->
+                
+                <!-- <div class="card" style="width: 48%; margin-left:10px">
+                    <div class="card-header">Trusted Stores <i class="fa fa-shopping-cart"></i></a></div>
+                    <div class="card-body">Buy Music Instruments</div>
+                    <div class="card-footer"><a class="btn btn-info" href="javascript:void(0)"
+                            onclick="gotoPage('RecommendedStore.html','menu')">View Stores</a></div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <script>
+         function Check(me) {
+            me.value = me.value.replace(/[0-9]/g, "");
+        }
+        function gotoPlayStore() {
+            var url = 'https://Play.google.com/store/apps/details?id=com.ItendeStyle.Itende';
+            var target = '_blank';
+            var options = "location = yes"
+            var ref = cordova.InAppBrowser.open(url, target, options);
+
+            ref.addEventListener('loadstart', loadstartCallback);
+            ref.addEventListener('loadstop', loadstopCallback);
+            ref.addEventListener('loaderror', loaderrorCallback);
+            ref.addEventListener('exit', exitCallback);
+
+            function loadstartCallback(event) {
+                console.log('Loading started: ' + event.url);
+            }
+
+            function loadstopCallback(event) {
+                console.log('Loading finished: ' + event.url);
+            }
+
+            function loaderrorCallback(error) {
+                console.log('Loading error: ' + error.message);
+            }
+
+            function exitCallback() {
+                console.log('Browser is closed...');
+            }
+        }
+        function getApplicationVersion() {
+            cordova.getAppVersion.getVersionNumber(function (version) {
+                $('#versionNumber').html(version);
+            });
+        }
+        function showNotification(mess) {
+            console.log(localStorage.getItem("announcement"));
+            if (localStorage.getItem("announcement") != mess.guid) {
+                cordova.plugins.notification.local.schedule({
+                    title: mess.title,
+                    text: mess.message,
+                    foreground: true
+                });
+                localStorage.setItem("announcement", mess.guid);
+                console.log("Notification received");
+            }
+        }
+        function showInterstitialAd() {
+            if (window.AdMob) AdMob.showInterstitial();
+            var admobid = {};
+            admobid = {
+                banner: 'ca-app-pub-9845513592050657/2935628640',
+                interstitial: 'ca-app-pub-9845513592050657/6715338970'
+            };
+            if (window.AdMob) AdMob.prepareInterstitial({ adId: admobid.interstitial, autoShow: false });
+
+        }
+        function notifyUpdates() {
+
+            if (localStorage.getItem("announcement") == undefined || localStorage.getItem("announcement") == null) {
+                localStorage.setItem("announcement", "0");
+            }
+
+            //get announcement
+            $.ajax({
+                url: "https://techforest.co.za/Itende/getNotifications2.php",
+                method: "GET",
+                data: null,
+                dataType: "JSON",
+                success: function (mess) {
+                    console.log(mess);
+                    showNotification(mess);
+                },
+                error: function (err) {
+                    console.log(err);
+                    //window.plugins.toast.showLongBottom('Server Error!', function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+                }
+            })
+
+        }
+        function updateUploadURL() {
+
+            if (localStorage.getItem("fileUploadURL") == undefined || localStorage.getItem("fileUploadURL") == null) {
+                localStorage.setItem("fileUploadURL", "https://techforest.co.za/Itende/upload_file.php");
+                localStorage.setItem("fileUploadBaseURL", "https://techforest.co.za/Itende");
+                localStorage.setItem("maxSizeFileUpload", "10485760");
+                localStorage.setItem("fileFolder", "/files/");
+            }
+
+            //get announcement
+            $.ajax({
+                url: "https://techforest.co.za/Itende/getUploadURL.php",
+                method: "GET",
+                data: null,
+                dataType: "JSON",
+                success: function (mess) {
+                    console.log(mess)
+                    localStorage.setItem("fileUploadURL", mess.fileUploadURL);
+                    localStorage.setItem("fileUploadBaseURL", mess.fileUploadBaseURL);
+                    localStorage.setItem("maxSizeFileUpload", mess.maxSizeFileUpload);
+                    localStorage.setItem("fileFolder", mess.fileFolder);
+                },
+                error: function (err) {
+                    console.log(err);
+                    //window.plugins.toast.showLongBottom('Server Error!', function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+                }
+            })
+
+        }
+        function test(x) {
+            console.log(x);
+        }
+        function alphaOnly(event, element) {
+            var key = event.keyCode;
+            //alert("Invalid Input");
+            console.log(element);
+            //$("#"+element.id).val("");
+            return ((key >= 65 && key <= 90) || key == 8);
+        }
+        function validateEmail(email) {
+            var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(email);
+        }
+        function validateNames(text, id) {
+            var re = /^[a-zA-Z]*$/;
+            console.log(re.test(text));
+            return re.test(text);
+        }
+        function countChars(text){
+              var len = text.length;
+              return len;
+        }
+        function removeWhiteSpace(str, id) {
+            str = str.replace(/\s/g, '');
+            $(id).val(str);
+            return str;
+        }
+        $(document).ready(function () {
+
+            $("#submit").click(function (event) {
+
+                var name = removeWhiteSpace($("#name").val(), "#name");
+                var surname = removeWhiteSpace($("#surname").val(), "#surname");
+                var Email = removeWhiteSpace($("#email").val(), "#email");
+                var Password = $("#password").val();
+                var cPassword = $("#c_password").val();
+            
+
+                if (name == "" || surname == "" || Email == "" || Password == "" || cPassword == "") {
+                    alert("Fill-in Missing fields");
+                    //window.plugins.toast.showLongBottom("Fill-in Missing fields", function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+
+                }else if(10<countChars(name)||15<countChars(surname)){
+                    alert("Name or Surname too long!");
+                }else if(4>countChars(name)||4>countChars(surname)){
+                    alert("Name or Surname too short!");
+                } else if (Password != cPassword) {
+                    alert("Passwords Do Not Match!");
+                    //window.plugins.toast.showLongBottom("Passwords Do Not Match", function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+
+
+                } else if (Password.length < 6) {
+                    alert("Passwords too short!");
+
+                } else if (!validateEmail(Email)) {
+                    alert("Invalid Email Address!");
+                } else {
+
+                    event.preventDefault();
+                    $('#submit').prop('disabled', true);
+                    $.ajax({
+
+                        url: "https://techforest.co.za/Itende/create_account.php",
+                        method: "POST",
+                        data: { name: name, surname: surname, Email: Email, Password: Password },
+                        dataType: "json",
+                        success: function (mess) {
+                            console.log(mess);
+                            if (mess.resMess == "Success") {
+                                window.plugins.toast.showLongBottom(mess.resMess, function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+                                window.localStorage.setItem("vNumber", mess.resCode);
+                                window.localStorage.setItem("userEmail", mess.Email);
+                                window.location.href = "verify.html";
+                            } else {
+                                console.log(mess);
+                                $('#submit').prop('disabled', false);
+                                window.plugins.toast.showLongBottom(mess.resMess, function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+                            }
+                            //$('#submit').prop('disabled',true);
+                        },
+                        error: function (err) {
+                            alert(err.responseText);
+                            $('#submit').prop('disabled', false);
+                            //alert("Registration Unsuccessful");
+                            window.plugins.toast.showLongBottom(err.responseText, function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+                        }
+                    });
+                }
+            })
+            //window.localStorage.clear();
+            $("#log_submit").click(function (event) {
+
+                var Email = removeWhiteSpace($("#log_email").val(), "#log_email");
+                var Password = $("#log_password").val();
+
+                if (Email == "" || Password == "") {
+                    alert("Fill-in Missing fields");
+                } else {
+                    event.preventDefault();
+                    $('#log_submit').prop('disabled', true);
+                    $.ajax({
+
+                        url: "https://techforest.co.za/Itende/login.php",
+                        method: "POST",
+                        data: { Email: Email, Password: Password },
+                        dataType: "json",
+                        success: function (mess) {
+                            if (mess.resCode == 0) {
+                                console.log(mess);
+                                //alert(mess.resMess);
+                                //window.localStorage.clear();
+                                window.localStorage.setItem("vNumber", mess.vNumber);
+                                window.localStorage.setItem("userEmail", mess.Email);
+                                window.plugins.toast.showLongBottom(mess.resMess, function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+                                window.location.href = "verify.html";
+
+                            } else if (mess.resCode == 1) {
+                                alert(mess.resMess);
+                                $('#log_submit').prop('disabled', false);
+                                window.plugins.toast.showLongBottom(mess.resMess, function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+
+                            } else {
+                                //window.localStorage.clear();
+                                window.localStorage.setItem("Name", mess.Name);
+                                window.localStorage.setItem("Surname", mess.Surname);
+                                window.localStorage.setItem("userEmail", mess.Email);
+                                window.location.href = "userPosts2.html";
+                            }
+                        },
+                        error: function (err) {
+
+                            window.plugins.toast.showLongBottom(err.responseText.toString(), function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+                            //alert(err.responseText);
+                            $('#log_submit').prop('disabled', false);
+                            //window.location.href = "signup.html";
+
+
+                        }
+                    });
+                }
+            })
+            return false;
+        })
+
+        function adSetter() {
+
+            var admobid = {};
+            if (/(android)/i.test(navigator.userAgent)) {
+                admobid = {
+                    banner: 'ca-app-pub-9845513592050657/2935628640',
+                    interstitial: 'ca-app-pub-9845513592050657/6715338970'
+                };
+
+            } else if (/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
+                admobid = {
+                    banner: 'ca-app-pub-9845513592050657/2935628640',
+                    interstitial: 'ca-app-pub-9845513592050657/6715338970'
+                };
+
+            } else {
+
+                admobid = {
+                    banner: 'ca-app-pub-9845513592050657/2935628640',
+                    interstitial: 'ca-app-pub-9845513592050657/6715338970'
+                };
+            }
+
+            if (AdMob) AdMob.createBanner({
+                adId: admobid.banner,
+                position: AdMob.AD_POSITION.BOTTOM_CENTER,
+                autoShow: true,
+            });
+
+            if (window.AdMob) AdMob.prepareInterstitial({ adId: admobid.interstitial, autoShow: false });
+        }
+        function onDeviceReady() {
+            document.addEventListener("backbutton", onBackKeyDown, false);
+            adSetter();
+            StatusBar.overlaysWebView(false);
+            notifyUpdates();
+            getApplicationVersion();
+            //checkUpdates();
+            //codePush.sync();
+            if (localStorage.getItem("showOnload") == undefined || localStorage.getItem("showOnload") == null) {
+                localStorage.setItem("showOnload", "false");
+            }
+
+            if (localStorage.getItem("showOnSwip") == undefined || localStorage.getItem("showOnSwip") == null) {
+                localStorage.setItem("showOnSwip", "false");
+            }
+        }
+
+
+        document.addEventListener("deviceready", onDeviceReady, false);
+        var app = angular.module("myBeatList", []);
+        app.controller("myCtrl", function ($scope, $http) {
+            $scope.beats = [];
+            $http({
+                method: "GET",
+                url: "https://techforest.co.za/Itende/getBeats3.php"
+            }).then(function mySuccess(response) {
+                console.log(response.data)
+                $("#loading").hide();
+                //$scope.process(response.data);
+                $scope.beats = response.data;
+                $scope.beats.splice(-1, 1);
+            }, function myError(response) {
+                $("#noNetwork").show();
+                $("#noNetworkBtn").show();
+                $("#loading").hide();
+                //$scope.myWelcome = response.statusText;
+            });
+            $scope.dFile = function (link) {
+                console.log(link);
+                saveFile(link);
+            }
+        });
+
+        app.controller("myCtrl2", function ($scope, $http) {
+            $scope.files = [];
+            $http({
+                method: "GET",
+                url: "https://techforest.co.za/Itende/getFiles3.php"
+            }).then(function mySuccess(response) {
+                console.log(response.data)
+                $("#loading").hide();
+                $scope.files = response.data;
+                $scope.files.splice(-1, 1);
+                //$scope.beats = response.data;
+            }, function myError(response) {
+                $("#noNetwork").show();
+                $("#noNetworkBtn").show();
+                $("#loading").hide();
+                //$scope.myWelcome = response.statusText;
+            });
+            $scope.dFile = function (link) {
+                console.log(link);
+                saveFile(link);
+            }
+        });
+        app.controller("tutorialsCtrl", function ($scope, $http) {
+            $scope.tutorials = [];
+            $http({
+                method: "GET",
+                url: "https://techforest.co.za/Itende/getTutorials2.php"
+            }).then(function mySuccess(response) {
+                $("#loadingTutorials").hide();
+                console.log(response.data)
+                $scope.tutorials = response.data;
+                //$scope.files.splice(-1, 1);
+                //$scope.beats = response.data;
+            }, function myError(response) {
+                $("#noNetworkTutorials").show();
+                $("#noNetworkTutorialsBtn").show();
+                $("#loadingTutorials").hide();
+                //$scope.myWelcome = response.statusText;
+            });
+            $scope.reloadPage = function (link) {
+                window.location.reload();
+            }
+            $scope.watchTutorial = function (link) {
+                console.log(link);
+                openBrowserTutorials(link);
+            }
+        });
+        window.onload = function () {
+            localStorage.setItem("tutorialsLoaded", "");
+            updateUploadURL();
+
+            if (localStorage.getItem("openTab") == undefined || localStorage.getItem("openTab") == "" || localStorage.getItem("openTab") == null) {
+
+                localStorage.setItem("openTab", "home");
+            } else {
+                var currentTab = localStorage.getItem("openTab");
+                swiptoTab(currentTab, currentTab + "Tab");
+            }
+        }
+        function showTutorials(mess) {
+            var content = "";
+            console.log(mess);
+            for (var x = 0; x < mess.length; x++) {
+                content += "<iframe  width='560' height='315' src='" + mess[x] + "' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen class='vids'></iframe><br>";
+            }
+            document.getElementById("tutorialroot").innerHTML += content;
+
+            var $content = $('#tutorialroot');
+            var intervalId = setInterval(function () {
+                if (!$content.is(':empty')) {
+                    $('#loading').hide();
+                    // $('.invite').slideToggle();
+                    $('#overlay-invite').hide();
+                    clearInterval(intervalId);
+                }
+            }, 5000);
+        }
+        function getTutorials() {
+            //$('.invite').slideToggle();
+            $('#loading').show();
+
+            var res = localStorage.getItem("tutorialsLoaded");
+            if (res == "") {
+
+                $.ajax({
+                    url: "https://techforest.co.za/Itende/getTutorials.php",
+                    method: "GET",
+                    data: null,
+                    dataType: "JSON",
+                    success: function (mess) {
+                        console.log(mess)
+                        localStorage.setItem("tutorialsLoaded", "true");
+                        showTutorials(mess);
+                    },
+                    error: function (err) {
+                        window.plugins.toast.showLongBottom('Server Error!', function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+                        $('#loading').hide();
+                    }
+                })
+
+            } else if (res == "true") {
+
+                $('#loading').hide();
+
+            }
+
+
+            // } else {
+            //     showTutorials(res);
+            // }
+        }
+        function gotoPage(x, currentTab) {
+            localStorage.setItem("openTab", currentTab);
+            console.log(x)
+            window.location.href = "" + x + "";
+        }
+        function onBackKeyDown() {
+
+            localStorage.setItem("openTab", "");
+
+            if (confirm("Exit App?"))
+                navigator.app.exitApp();
+
+
+        }
+        document.addEventListener("backbutton", onBackKeyDown, false);
+        var currentTab = "";//localStorage.getItem("openTab");
+
+        function openTab(thisss, tabName) {
+            var i, x, tablinks;
+            console.log(thisss);
+            console.log(thisss.id)
+            localStorage.setItem("openTab", tabName);
+            x = document.getElementsByClassName("city");
+            icons = document.getElementsByClassName("fa-icons");
+            tablinks = document.getElementsByClassName("tablink");
+
+            for (i = 0; i < x.length; i++) {
+                icons[i].className = icons[i].className.replace(" tabC", "");
+            }
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" activetablink", "");
+            }
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            document.getElementById(tabName).style.display = "block";
+            var faicon = thisss.querySelector(".fa-icons");
+            var span = thisss.querySelector("span");
+            faicon.classList.add("tabC");
+            span.classList.add("tabC");
+
+            thisss.classList.add("activetablink");
+            // if (tabName == "tutorials")
+            //    // getTutorials();
+
+            if (tabName == 'files') {
+                showInterstitialAd();
+            }
+        }
+        function swiptoTab(tabName, tabButton) {
+            console.log(tabName + ": received")
+            localStorage.setItem("openTab", tabName);
+            var xxx = localStorage.getItem("openTab");
+            console.log(xxx + " open Tab");
+            var i, x, tablinks;
+            x = document.getElementsByClassName("city");
+            icons = document.getElementsByClassName("fa-icons");
+            tablinks = document.getElementsByClassName("tablink");
+            console.log(tablinks);
+            for (i = 0; i < icons.length; i++) {
+                icons[i].className = icons[i].className.replace(" tabC", "");
+            }
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" activetablink", "");
+            }
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            document.getElementById(tabName).style.display = "block";
+            var thisss = document.getElementById(tabButton);
+            console.log(thisss)
+            var faicon = thisss.querySelector(".fa-icons");
+            var span = thisss.querySelector("span");
+            faicon.classList.add("tabC");
+            span.classList.add("tabC");
+            thisss.classList.add("activetablink");
+
+            //if (window.AdMob) AdMob.showInterstitial();
+            // event.preventDefault();
+        }
+        function openUserTab(evt, cityName) {
+            var i, x, tablinks;
+            x = document.getElementsByClassName("loginTab");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("logintablink");
+            for (i = 0; i < x.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" itendeAppColor", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " itendeAppColor";
+        }
+        function openDownloadTab(evt, tabName) {
+            var i, x, tablinks;
+            x = document.getElementsByClassName("dTab");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("downloadtablink");
+            for (i = 0; i < x.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" itendeAppColor", "");
+            }
+
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " itendeAppColor";
+        }
+
+        document.addEventListener('touchstart', handleTouchStart, false);
+        document.addEventListener('touchmove', handleTouchMove, false);
+
+        var xDown = null;
+        var yDown = null;
+
+        function getTouches(evt) {
+            return evt.touches ||             // browser API
+                evt.originalEvent.touches; // jQuery
+        }
+
+        function handleTouchStart(evt) {
+            const firstTouch = getTouches(evt)[0];
+            xDown = firstTouch.clientX;
+            yDown = firstTouch.clientY;
         };
 
-      } else if (/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
-        admobid = {
-          banner: 'ca-app-pub-9845513592050657/2935628640',
-          interstitial: 'ca-app-pub-9845513592050657/6715338970'
+        function handleTouchMove(evt) {
+            if (!xDown || !yDown) {
+                return;
+            }
+
+            var xUp = evt.touches[0].clientX;
+            var yUp = evt.touches[0].clientY;
+
+            var xDiff = xDown - xUp;
+            var yDiff = yDown - yUp;
+
+            if (Math.abs(xDiff) > Math.abs(yDiff)) {/*most significant*/
+                if (xDiff > 0) {
+                    /*  swipe to left */
+                    console.log("left")
+                    //console.log(currentTab)
+                    // 1
+                    currentTab = localStorage.getItem("openTab");
+                    console.log(currentTab)
+                    switch (currentTab) {
+                        case "home":
+                            swiptoTab("files", "filesTab");
+                            showInterstitialAd();
+                            break;
+                        case "files":
+                            swiptoTab("tutorials", "tutorialsTab");
+                            //getTutorials();
+                            break;
+                        case "tutorials":
+                            swiptoTab("user", "userTab");
+                            break;
+                        case "user":
+                            swiptoTab("menu", "menuTab");
+                            break;
+                        case "menu":
+                            //swiptoTab("menu","menuTab");
+                            break;
+                    }
+
+                } else {
+                    /*  swipe to right */
+                    console.log("RRRRRR")
+
+
+                    currentTab = localStorage.getItem("openTab");
+                    console.log(currentTab)
+                    switch (currentTab) {
+                        case "menu":
+                            swiptoTab("user", "userTab");
+                            break;
+                        case "user":
+                            swiptoTab("tutorials", "tutorialsTab");
+                            //getTutorials();
+                            break;
+                        case "tutorials":
+                            swiptoTab("files", "filesTab");
+                            showInterstitialAd();
+                            break;
+                        case "files":
+                            swiptoTab("home", "homeTab");
+                            break;
+                        case "home":
+                            // swiptoTab("home");
+                            break;
+                    }
+
+                }
+            } else {
+                if (yDiff > 0) {
+                    /* up swipe */
+                } else {
+                    /* down swipe */
+                }
+            }
+            /* reset values */
+            xDown = null;
+            yDown = null;
         };
-
-      } else {
-
-        admobid = {
-          banner: 'ca-app-pub-9845513592050657/2935628640',
-          interstitial: 'ca-app-pub-9845513592050657/6715338970'
-        };
-      }
-
-      if (AdMob) AdMob.createBanner({
-        adId: admobid.banner,
-        position: AdMob.AD_POSITION.BOTTOM_CENTER,
-        autoShow: true,
-      });
-
-      if (window.AdMob) AdMob.prepareInterstitial({ adId: admobid.interstitial, autoShow: false });
-    }
-    function onDeviceReady() {
-      document.addEventListener("backbutton", onBackKeyDown, false);
-      adSetter();
-      StatusBar.overlaysWebView(false);
-     
-    }
-    // $(document).ready(function () {
-    //   $("#submit").click(function (event) {
-
-    //   })
-    // });
- 
-   
-  </script>
+    </script>
 </body>
 
-</html>
 
-<!-- <button onclick="window.plugins.toast.showShortTop('Hello there!', function(a){console.log('toast success: ' + a)}, function(b){alert('toast error: ' + b)})">Toast showShortTop</button>
-      <button onclick="window.plugins.toast.showLongBottom('Hello there!', function(a){console.log('toast success: ' + a)}, function(b){alert('toast error: ' + b)})">Toast showLongBottom</button>
-      <button onclick="window.plugins.toast.show('Hello there!', 'long', 'center', function(a){console.log('toast success: ' + a)}, function(b){alert('toast error: ' + b)})">Toast show long center</button>
-   -->
+<!-- Mirrored from demos.creative-tim.com/paper-kit-2-pro/examples/login-page.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 25 Jun 2018 07:41:26 GMT -->
+
+</html>

@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from demos.creative-tim.com/paper-kit-2-pro/examples/login-page.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 25 Jun 2018 07:41:26 GMT -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<!-- /Added by HTTrack -->
+
+<head>
+    <meta charset="utf-8" />
+
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+        name='viewport' />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!-- Extra details for Live View on GitHub Pages -->
+    <!-- Canonical SEO -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/paper-kit.min89bf.css?v=2.2.1" rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="css/demo.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: white !important;
+        }
+
+        .page-header .filter:after {
+            background-color: white !important;
+        }
+
+        .container {
+            /* remember to set a width */
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        .form-control:focus {
+            border-color: inherit;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
+
+        .card-title {
+            color: #000 !important;
+        }
+
+        .form-control[type=text],
+        #email,
+        #password,
+        #log_email,
+        #log_password,
+        #c_password {
+            border: none;
+            outline: none;
+            border-bottom: 2px solid #888 !important;
+            transition: .5s;
+            margin-top: 10px;
+        }
+
+        /* #email{
+            border: none;
+            outline: none;
+            border-bottom: 2px solid #888 !important;
+            transition: .5s;
+            margin-top: 10px;
+        } 
+        #password{
+            border: none;
+            outline: none;
+            border-bottom: 2px solid #888 !important;
+            transition: .5s;
+            margin-top: 10px;
+        }
+        #c_password{
+            border: none;
+            outline: none;
+            border-bottom: 2px solid #888 !important;
+            transition: .5s;
+            margin-top: 10px;
+        }*/
+
+        .searchformfld {
+            position: relative;
+            margin: 5px 0px;
+        }
+
+        .searchformfld label {
+            position: absolute;
+            padding-left: 10px;
+            top: 0px;
+            cursor: text;
+            color: #000;
+        }
+
+        .register-form .form-control {}
+
+        .card-register {
+            background-color: white;
+            /* margin-top: -50px; */
+        }
+
+        .searchformfld input:focus+label,
+        .searchformfld input:not(:placeholder-shown)+label {
+            opacity: 1;
+            transform: scale(.9) translateY(-130%) translateX(-25px);
+            color: #000;
+        }
+
+        .searchformfld input:focus,
+        #email:focus,
+        #password:focus,
+        #c_password:focus {
+            border-bottom: 1px solid #ffc107 !important;
+            /* // outline-color: #000; */
+        }
+
+        /* .searchformfld input {
+            width: 100%;
+            padding-left: 10px;
+        } */
+
+        .searchformfld label,
+        .searchformfld input {
+            transition: all 0.2s;
+            transition-timing-function: ease;
+            transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+            /* opacity: 0.5; */
+        }
+
+        .itendeAppColor {
+            background-color: #fbc658 !important;
+            border-color: #fbc658 !important;
+        }
+
+        .btn-warning {
+            background-color: #fbc658 !important;
+            border-color: #fbc658 !important;
+            color: #fff;
+            opacity: 1;
+            filter: alpha(opacity=100);
+        }
+
+        /* .w3-bar {
+            width: 41% !important;
+            overflow: hidden;
+        } */
+
+        @media screen and (max-width: 991px) {
+            .wrapper {
+                transition: all .33s cubic-bezier(.685, .0473, .346, 1);
+                left: 0;
+                background-color: #fff;
+                margin-top: 40px;
+                margin-left: 0px;
+            }
+
+        }
+    </style>
+
+</head>
+
+<body class="login-page full-screen sidebar-collapse">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top itendeAppColor text-dark" id="navbar">
+        <a id="appName" class="navbar-brand text-dark" href="index.html">Itende App</a>
+        <!-- <button class="navbar-toggler" onclick="menu()" type="button">
+          <span class="navbar-toggler-icon"></span>
+        </button> -->
+        <!-- <div class="collapse navbar-collapse" id="navbarCollapse" style="margin-top: 10px;">
+          <ul class="navbar-nav mr-auto">
+            <li><a class="nav-item" href="DownloadBeats.html">Beats <i class="fa fa-arrow-circle-down"></i></a></li>
+            <!-- <li><a class="nav-item" href="downloadFiles.html">Files <i class="fa fa-arrow-circle-down"></i></a></li>  -->
+            <!-- <li><a class="nav-item" href="TempoChanger.html">TempoChanger <i class="fa fa-play-circle-o"></i></a></li>  -->
+            <li><a class="nav-item" href="tutorials.html">Tutorials <i class="fa fa-youtube-play"></i></a></li>
+            <li><a class="nav-item" href="signup2.html">Sign Up <i class="fa fa-user"></i></a></li>
+            <li><a class="nav-item" href="login.html">Login <i class="fa fa-sign-in"></i></a></li>
+          </ul>
+        </div> -->
+    </nav>
+
+    <div class="wrapper">
+        <div class="page-header" style="background-image: url('../assets/img/sections/bruno-abatti.jpg');">
+            <div class="filter"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-6 ml-auto mr-auto">
+                        <div class="w3-bar w3-border w3-card-4 w3-white" style="border-radius: 20px;">
+                            <a class="w3-bar-item w3-button tablink itendeAppColor" href="#" style="width: 50%;"
+                                onclick="openCity1(event,'LOGIN')">LOGIN</a>
+                            <a class="w3-bar-item w3-button tablink" style="width: 50%;"
+                                onclick="openCity1(event,'SignUpDV')">SIGNUP</a>
+
+                        </div>
+                        <div id="LOGIN" class="w3-container city">
+                            <div class="card card-register">
+                                <h3 class="card-title">LOGIN</h3>
+                                <form class="register-form">
+
+                                    <div class="form-group searchformfld">
+                                        <input type="email" class="form-control" name="log_email" placeholder=" "
+                                            id="log_email" maxlength="50" required />
+                                        <label for="log_email">Email</label>
+                                    </div>
+                                    <div class="form-group searchformfld">
+                                        <input type="password" class="form-control" name="log_password" placeholder=" "
+                                            id="log_password" maxlength="10" required />
+                                        <label for="log_password">Password</label>
+                                    </div>
+
+                                    <input type="submit" class="btn btn-warning btn-block btn-round" name="log_submit"
+                                        id="log_submit" value="LOGIN" />
+
+                                </form>
+                                <!-- <div class="forgot">
+                                    <a href="#paper-kit" class="btn btn-link btn-danger">Forgot password?</a>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div id="SignUpDV" class="w3-container city" style="display:none">
+                            <div class="card card-register">
+                                <h3 class="card-title">SignUp</h3>
+                                <form class="register-form">
+                                    <div class="form-group searchformfld">
+                                        <input type="text" class="form-control" name="name" placeholder=" " id="name"
+                                            maxlength="15" pattern="[A-Za-z]" required />
+                                        <label for="name">Name</label>
+                                    </div>
+                                    <div class="form-group searchformfld">
+                                        <input type="text" class="form-control" name="surname" placeholder=" "
+                                            id="surname" maxlength="15" pattern="[A-Za-z]" required />
+                                        <label for="surname">Surname</label>
+                                    </div>
+                                    <div class="form-group searchformfld">
+                                        <input type="email" class="form-control" name="email" placeholder=" " id="email"
+                                            maxlength="50" required />
+                                        <label for="email">Email</label>
+                                    </div>
+                                    <div class="form-group searchformfld">
+                                        <input type="password" class="form-control" name="password" placeholder=" "
+                                            id="password" maxlength="10" required />
+                                        <label for="password">Password</label>
+                                    </div>
+                                    <div class="form-group searchformfld">
+                                        <input type="password" class="form-control" name="c_password" placeholder=" "
+                                            id="c_password" maxlength="10" required />
+                                        <label for="c_password">Confirm Password</label>
+                                    </div>
+                                    <input type="submit" class="btn btn-warning btn-block btn-round" name="submit"
+                                        id="submit" value="Sign Up" />
+                                    <!-- <label>Email</label>
+                                    <input type="email" class="form-control no-border" placeholder="Email">
+                                    <label>Password</label>
+                                    <input type="password" class="form-control no-border" placeholder="Password"> -->
+                                    <!-- <button class="btn btn-danger btn-block btn-round">Login</button> -->
+                                </form>
+                                <!-- <div class="forgot">
+                                    <a href="#paper-kit" class="btn btn-link btn-danger">Forgot password?</a>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="demo-footer text-center">
+                        <h6>&copy;
+                            <script>
+                                document.write(new Date().getFullYear())
+                            </script>, made with <i class="fa fa-heart heart"></i> by Creative Tim</h6>
+                    </div> -->
+            </div>
+        </div>
+    </div>
+    <script>
+        function openCity1(evt, cityName) {
+            var i, x, tablinks;
+            x = document.getElementsByClassName("city");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablink");
+            for (i = 0; i < x.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" itendeAppColor", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " itendeAppColor";
+        }
+        function alphaOnly(event) {
+            var key = event.keyCode;
+            return ((key >= 65 && key <= 90) || key == 8);
+        }
+        function validateEmail(email) {
+            var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(email);
+        }
+        $(document).ready(function () {
+
+            $("#submit").click(function (event) {
+
+                var name = $("#name").val();
+                var surname = $("#surname").val();
+                var Email = $("#email").val();
+                var Password = $("#password").val();
+                var cPassword = $("#c_password").val();
+
+                if (name == "" || surname == "" || Email == "" || Password == "" || cPassword == "") {
+                    alert("Fill-in Missing fields");
+                } else if (Password != cPassword) {
+                    alert("Passwords Do Not Match");
+
+                } else if (Password.length < 6) {
+                    alert("Passwords too short");
+                } else if (!validateEmail(Email)) {
+                    alert("Not Valid Email Address !");
+                } else {
+                    event.preventDefault();
+                    $('#submit').prop('disabled', true);
+                    $.ajax({
+
+                        url: "https://techforest.co.za/Itende/create_account.php",
+                        method: "POST",
+                        data: { name: name, surname: surname, Email: Email, Password: Password },
+                        dataType: "json",
+                        success: function (mess) {
+                            //console.log(mess);
+                            if (mess.resMess == "Success") {
+                                window.plugins.toast.showLongBottom(mess.resMess, function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+                                window.localStorage.setItem("vNumber", mess.resCode);
+                                window.localStorage.setItem("userEmail", mess.Email);
+                                window.location.href = "verify.html";
+                            } else {
+                                //console.log(mess);
+                                $('#submit').prop('disabled', false);
+                                window.plugins.toast.showLongBottom(mess.resMess, function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+                            }
+                            //$('#submit').prop('disabled',true);
+                        },
+                        error: function (err) {
+                            //alert(err.responseText);
+                            $('#submit').prop('disabled', false);
+                            //alert("Registration Unsuccessful");
+                            window.plugins.toast.showLongBottom(err.responseText, function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+                        }
+                    });
+                }
+            })
+            window.localStorage.clear();
+            $("#log_submit").click(function (event) {
+
+                var Email = $("#log_email").val();
+                var Password = $("#log_password").val();
+
+                if (Email == "" || Password == "") {
+                    alert("Fill-in Missing fields");
+                } else {
+                    event.preventDefault();
+                    $('#log_submit').prop('disabled', true);
+                    $.ajax({
+
+                        url: "https://techforest.co.za/Itende/login.php",
+                        method: "POST",
+                        data: { Email: Email, Password: Password },
+                        dataType: "json",
+                        success: function (mess) {
+                            if (mess.resCode == 0) {
+                                //alert(mess.resMess);
+                                window.localStorage.clear();
+                                window.localStorage.setItem("vNumber", mess.vNumber);
+                                window.localStorage.setItem("userEmail", mess.Email);
+                                window.location.href = "verify.html";
+                                window.plugins.toast.showLongBottom(mess.resMess, function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+
+                            } else if (mess.resCode == 1) {
+                                //alert(mess.resMess);
+                                $('#log_submit').prop('disabled', false);
+                                window.plugins.toast.showLongBottom(mess.resMess, function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+
+                            } else {
+                                window.localStorage.clear();
+                                window.localStorage.setItem("Name", mess.Name);
+                                window.localStorage.setItem("Surname", mess.Surname);
+                                window.localStorage.setItem("userEmail", mess.Email);
+                                window.location.href = "userPosts.html";
+                            }
+                        },
+                        error: function (err) {
+
+                            window.plugins.toast.showLongBottom(err.responseText.toString(), function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+                            //alert(err.responseText);
+                            $('#log_submit').prop('disabled', false);
+                            //window.location.href = "signup.html";
+
+
+                        }
+                    });
+                }
+            })
+            return false;
+        })
+
+        document.addEventListener("deviceready", onDeviceReady, false);
+
+        function adSetter() {
+
+            var admobid = {};
+            if (/(android)/i.test(navigator.userAgent)) {
+                admobid = {
+                    banner: 'ca-app-pub-9845513592050657/2935628640',
+                    interstitial: 'ca-app-pub-9845513592050657/6715338970'
+                };
+
+            } else if (/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
+                admobid = {
+                    banner: 'ca-app-pub-9845513592050657/2935628640',
+                    interstitial: 'ca-app-pub-9845513592050657/6715338970'
+                };
+
+            } else {
+
+                admobid = {
+                    banner: 'ca-app-pub-9845513592050657/2935628640',
+                    interstitial: 'ca-app-pub-9845513592050657/6715338970'
+                };
+            }
+
+            if (AdMob) AdMob.createBanner({
+                adId: admobid.banner,
+                position: AdMob.AD_POSITION.BOTTOM_CENTER,
+                autoShow: false,
+            });
+
+            if (window.AdMob) AdMob.prepareInterstitial({ adId: admobid.interstitial, autoShow: false });
+        }
+        function onDeviceReady() {
+
+            adSetter();
+
+
+        }
+    </script>
+</body>
+<!-- Mirrored from demos.creative-tim.com/paper-kit-2-pro/examples/login-page.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 25 Jun 2018 07:41:26 GMT -->
+
+</html>

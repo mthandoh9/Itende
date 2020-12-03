@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <!-- <meta http-equiv="Content-Security-Policy"
+        content="default-src *; style-src *  'unsafe-inline'; script-src *  'unsafe-inline'; media-src *"> -->
+    <meta name="viewport"
+        content="initial-scale=1,user-scalable=no, width=device-width, height=device-height, viewport-fit=cover">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="mainStyle.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.mobile.theme-1.4.5.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.mobile.icons-1.4.5.min.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.mobile.structure-1.4.5.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>
+    <script src="js/angular.min.js"></script>
+    <style>
+        .itendeAppColor,
+        .itendeAppColor:hover {
+            background-color: #ffc107 !important;
+            border-color: #ffc107 !important;
+        }
+
+        .nav-spans {
+            margin-top: 29px;
+            margin-left: -27px;
+            /* right: inherit; */
+            position: absolute;
+            font-family: Arial, Helvetica, sans-serif !important;
+            font-size: large;
+        }
+
+        .userPosts {
+            margin-top: 10px;
+            border: 1px solid lightgray;
+            border-radius: 5px;
+            padding: 5px;
+            box-shadow: 2px 2px 8px 1px #5e5e5e;
+
+            white-space: pre-wrap;
+            /* CSS3 */
+            white-space: -moz-pre-wrap;
+            /* Firefox */
+            white-space: -pre-wrap;
+            /* Opera <7 */
+            white-space: -o-pre-wrap;
+            /* Opera 7 */
+            word-wrap: break-word;
+            /* IE */
+        }
+
+        .postMessage {
+
+            width: 100%;
+            overflow-y: scroll;
+            height: 230px;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* The Modal (background) */
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            padding-top: 100px;
+            /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0);
+            /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 99%;
+            height: 347px;
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .postHeader {
+            margin-left: -79px;
+        }
+
+        .postMess {}
+
+        .postFooter {
+            height: 20px !important;
+            padding: 2px;
+            width: 100%;
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+
+        .footerItem {
+            display: block;
+            width: 100%;
+            height: calc(2.25rem + 2px);
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #495057;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #ced4da;
+            /* border-radius: .25rem; */
+            /* transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; */
+        }
+
+        .mycardfooterBtn {
+            width: 30%;
+        }
+
+        .commentsList {
+            border-bottom: 1px solid lightgray;
+        }
+
+        .userCom {
+            word-wrap: break-word;
+
+
+        }
+
+        .commentsModalContent {
+
+            padding: 15px !important;
+            height: 95% !important;
+        }
+
+        .commentslistDiv {
+            min-height: 160px;
+            margin-bottom: 10px;
+            padding: 10px 10px 10px 10px;
+            overflow-y: scroll;
+            border: 1px solid lightgray;
+            border-radius: 5px;
+
+        }
+
+        .custom {
+            width: 50% !important;
+            height: 80px !important;
+            font-size: x-large !important;
+        }
+
+        .activetablink {
+
+            border-bottom: 12px solid #000 !important;
+        }
+    </style>
+</head>
+
+<body ng-app="userDash" ng-controller="userPostsController">
+    <div class="w3-bar w3-yellow mainMenu itendeAppColor" style="height: 70px;">
+
+        <a class="w3-bar-item w3-button custom tablink activetablink" href="#" id="postingSectionTab"
+            onclick="openTab(this,'postingSection')">
+            <i id="homeI" class="fa fa-home fa-icons tabC" style="color:black;font-size: x-large;"></i>
+            <span class="nav-spans">Home</span>
+        </a>
+        <a class="w3-bar-item w3-button custom tablink" href="#" id="profileSectionTab" onclick="openTab(this,'profileSectionTab')">
+            <i id="downloadsI" class="fa fa-user fa-icons"></i>
+            <span class="nav-spans">Profile</span>
+        </a>
+    </div>
+    <div ng-init="initialize()" id="postingSection" class="container-fluid">
+        <a id="myBtn" class="btn btn-sm btn-warning">Create Post <i class="fa fa-newspaper-o"></i></a>
+        <!-- <a id="myBtnFile" class="btn btn-sm btn-warning">Upload File <i class="fa fa-file-o"></i></a> -->
+        <div id="myModal2" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <form id="fileForm">
+                    <div class="row">
+                        <div class="col-sm-3 col-md-5">
+                            <label>File Name: </label>
+                        </div>
+                        <div class="col-sm-3 col-md-5">
+                            <input type="text" id="fileName" name="fileName" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <input type="file" id="file" name="file" />
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="submit" id="submit" name="file" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div class="col-sm-12">
+                    <textarea type="text" id="postMessage" placeholder="Text..." ng-model="postMess" class="postMessage"
+                        maxlength="500">
+                    </textarea>
+                </div>
+                <div class="col-sm-4">
+                    <a id="post" class="btn btn-md btn-warning" ng-if="isPostUpdate==false"
+                        ng-click="createEditPost()">Post <i class="fa fa-send"></i></a>
+                    <a id="post" class="btn btn-md btn-warning" ng-if="isPostUpdate"
+                        ng-click="createEditPost()">Update</a>
+                </div>
+            </div>
+        </div>
+        <div id="root">
+
+            <div id="commentsModal" class="modal">
+                <div class="modal-content commentsModalContent">
+                    <span class="close" id="closeSpan" ng-click="closeComments()">&times;</span>
+                    {{comsg}}
+                    <div class="commentslistDiv">
+                        <div ng-repeat="xx in comments" class="commentsList" id="">
+                            <label style="font-size:small;"><b>{{xx.Name}} {{xx.Surname}}</b></label>
+                            <label style="font-size: x-small;margin-left:20px ;">{{xx.Date}}</label></br>
+                            <p class="userCom">
+                                {{xx.comment}}
+                            </p>
+                            <a class="btn btn-sm btn-danger" style="margin-bottom:5px;"
+                                ng-if="loggedUser==xx.Email||loggedUser==isAdmin||loggedUser==xx.postedBy"
+                                ng-click="deleteComment(xx)">Delete <i class="fa fa-trash"></i></a>
+                        </div>
+                    </div>
+                    <div id="commentdiv">
+                        <div class="row">
+                            <!-- <div class="col-sm-3 col-md-5">
+                            </div> -->
+                            <div class="col-sm-12 col-md-5">
+                                <textarea type="text" style="width:100%;" id="commentText" ng-model="userComment"
+                                    placeholder="Comment..." name="commentText" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!-- <div class="col-sm-6">
+                                <input type="file" id="file" name="file" />
+                            </div> -->
+                            <div class="col-sm-6">
+                                <button ng-click="addComment()">Comment</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card mypostscard" ng-repeat="x in posts"
+                style="width: 100%; position: unset !important; margin-top:5px;">
+                <div class="card-header">
+                    <label>{{x.Name}} {{x.Surname}}</label> <label
+                        style="position: absolute; right: 20px; font-size: xx-small;">{{x.Date}}</label>
+                </div>
+                <div class="card-body">
+                    <p>{{x.postMessage}}</p>
+                </div>
+                <div class="card-footer">
+                    <a class="btn mycardfooterBtn" href="#" ng-if="x.IsEdit" ng-click="editmypost(x)"><i
+                            class="fa fa-pencil"></i> </a>
+                    <a class="btn mycardfooterBtn" id="commentBtn" href="#"
+                        data-ng-style="(x.IsEdit==false) ? { 'width': '45%'}:{ 'width': '30%' }"
+                        ng-click='openComments(x.Id)'><i class="fa fa-comment"></i> <span
+                            class="badge badge-info">{{x.numOfComments}}</span></a>
+                    <a class="btn mycardfooterBtn" href="#"
+                        data-ng-style="(x.IsEdit==false) ? { 'width': '45%'}:{ 'width': '30%' }"
+                        ng-click="postAction(x.action,x.Id)">{{x.action}}</a>
+                </div>
+            </div>
+
+            <center><img src="img/loading.gif" id="loading" /></center>
+        </div>
+    </div>
+    <div id="profileSection">
+          
+    </div>
+
+    <div id="overlay-invite">
+        <div class="invite">
+            <div class="invite-content">
+                <ul class="invite-list">
+                    <button onClick="fbShare()" class="invite-item" style="background: #103d99;"><i
+                            class="fa fa-facebook"></i></button>
+                    <button onClick="whatsappShare()" class="invite-item"
+                        style="background: linear-gradient(#32b221,#24a316);"><i class="fa fa-whatsapp"></i></button>
+                    <button onClick="twitterShare()" class="invite-item"
+                        style="background: linear-gradient(#5bbfdb,#82d1e7);"><i class="fa fa-twitter"></i></button>
+                    <button onClick="otherShare()" class="invite-item" style="background: #ffc107;">
+                        <i style="color:black" class="fa fa-pencil"></i></button>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="js/slim.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="index123.js"></script>
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/moment.js"></script>
+    <script type="text/javascript">
+
+        var app = angular.module("userDash", []);
+        app.controller("userPostsController", function ($scope, $http, $interval) {
+            // $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+            $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+            $scope.posts = [];
+            $scope.syncedposts = [];
+            $scope.comments = [];
+            $scope.userComment = "";
+            $scope.openPostID = 0;
+            $scope.loggedUser = localStorage.getItem("userEmail");
+            $scope.isAdmin = "mthandoh9@gmail.com";
+            $scope.loggedUserName = localStorage.getItem("Name");
+            $scope.loggedUserSurname = localStorage.getItem("Surname");
+            $scope.comsg = "";
+            $scope.postMess = "";
+            $scope.isPostUpdate = false;
+            $scope.updatePostId = 0;
+
+
+            $scope.initialize = function () {
+
+                var email = window.localStorage.getItem("userEmail");
+                if (email == null || email == undefined || email == "") {
+                    window.location.href = "index.html";
+                }
+                $('#logout').css("color", "red");
+                $http({
+                    method: "GET",
+                    url: "https://techforest.co.za/Itende/getPosts.php"
+                }).then(function mySuccess(response) {
+                    console.log(response.data)
+                    angular.forEach(response.data, function (value, key) {
+                        var action = "";
+                        action = ($scope.loggedUser == value.Email || $scope.loggedUser == $scope.isAdmin) ? "Delete" : "Report";
+                        value["action"] = action;
+                        value["IsEdit"] = ($scope.loggedUser == value.Email) ? true : false;
+
+                        value.Date = $scope.getDate(value.Date);
+                        $scope.posts.push(value);
+                        $('#loading').hide();
+                    })
+                    window.plugins.toast.showLongBottom("Welcome " + $scope.loggedUserName, function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+
+                }, function myError(response) {
+                    window.plugins.toast.showLongBottom(response.responseText, function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+
+                });
+            }
+            var syncPosts = function () {
+                $http({
+                    method: "GET",
+                    url: "https://techforest.co.za/Itende/getPosts.php"
+                }).then(function mySuccess(response) {
+                    console.log(response.data)
+                    $scope.syncedposts = response.data;
+                    angular.forEach($scope.posts, function (value, key) {
+                        var res = $scope.syncedposts.find(x => x.Id === value.Id);
+                        if (res == null || res == undefined) {
+                            var index = $scope.posts.indexOf(value);
+                            $scope.posts.splice(index, 1);
+                        }
+                    })
+                    angular.forEach(response.data, function (value, key) {
+                        var res = $scope.posts.find(x => x.Id === value.Id);
+                        if (res != null || res != undefined) {
+                            $scope.posts.find(x => x.Id === value.Id).numOfComments = value.numOfComments;
+                            $scope.posts.find(x => x.Id === value.Id).postMessage = value.postMessage;
+                            return;
+                        }
+
+                        var action = "";
+                        action = ($scope.loggedUser == value.Email || $scope.loggedUser == $scope.isAdmin) ? "Delete" : "Report"
+                        value["action"] = action;
+                        value["IsEdit"] = ($scope.loggedUser == value.Email) ? true : false;
+                        value.Date = $scope.getDate(value.Date);
+                        $scope.posts.unshift(value);
+                    })
+
+                }, function myError(response) {
+                    //$scope.myWelcome = response.statusText;
+                });
+            };
+            $interval(syncPosts, 15000);
+            $scope.closeComments = function () {
+                $('#commentsModal').hide();
+                var body = document.body;
+                body.style = "overflow-y: unset;";
+                $scope.comments = [];
+                //$scope.$digest();
+
+            }
+            $scope.editmypost = function (post) {
+                var modal = document.getElementById("myModal");
+                modal.style.display = "block";
+                //var editpost =$scope.posts.find(x => x.Id === x);
+                //var postMess = findpost(x, usersposts);
+                $scope.postMess = post.postMessage;
+                $('#post').html("Update");
+                isUpdate = true;
+                $scope.isPostUpdate = true;
+                $scope.updatePostId = post.Id;
+                window.localStorage.setItem("IdUpdate", post.Id);
+
+            }
+            $scope.closemypost = function (post) {
+                var modal = document.getElementById("myModal");
+                modal.style.display = "none";
+                $('#post').html("Post");
+                $('#post').removeClass('disabled');
+                isUpdate = false;
+                $scope.isPostUpdate = false;
+                $scope.updatePostId = 0;
+                //window.localStorage.setItem("IdUpdate", post.Id);
+
+            }
+            $scope.getById = function (id, array) {
+                return array.find(x => x.id === id);
+            }
+            $scope.createEditPost = function () {
+
+                var lastId = parseInt($scope.posts[0].Id) + 1;
+                var postId = (!$scope.isPostUpdate) ? lastId : $scope.updatePostId;
+                var post = {
+                    Id: postId,
+                    postMessage: $scope.postMess,
+                    Name: $scope.loggedUserName,
+                    Surname: $scope.loggedUserSurname,
+                    Email: $scope.loggedUser,
+                    action: "Delete",
+                    numOfComments: 0,
+                    IsEdit: true,
+                    Date: $scope.getDate(new Date())
+                };
+
+                if (!$scope.isPostUpdate) {
+                    $scope.posts.unshift(post);
+
+                } else {
+                    $scope.posts.find(x => x.Id === post.Id).postMessage = post.postMessage;
+                }
+                $scope.pushPost(post);
+            }
+            $scope.addComment = function () {
+
+                var lastId = ($scope.comments.length != 0) ? parseInt($scope.comments[$scope.comments.length - 1].Id) + 1 : 0;
+                var comment = {
+                    Id: lastId,
+                    postId: $scope.openPostID,
+                    comment: $scope.userComment,
+                    Name: $scope.loggedUserName,
+                    Surname: $scope.loggedUserSurname,
+                    Email: $scope.loggedUser,
+                    Date: $scope.getDate(new Date())
+                };
+                $scope.comments.unshift(comment);
+                $scope.comsg = ($scope.comments.length == 0) ? "No comments" : "";
+                $scope.userComment = "";
+                $scope.posts.find(x => x.Id === comment.postId).numOfComments += 1;
+                $scope.pushComment(comment);
+            }
+            $scope.deleteComment = function (comment) {
+
+                var index = $scope.comments.indexOf(comment);
+                $scope.comments.splice(index, 1);
+                $scope.comsg = ($scope.comments.length == 0) ? "No comments" : "";
+
+
+                $scope.posts.find(x => x.Id === comment.postId).numOfComments -= 1;
+
+                $.ajax({
+                    url: "https://techforest.co.za/Itende/deleteComment.php",
+                    method: "POST",
+                    data: comment,
+                    dataType: "json",
+                    success: function (mess) {
+                        console.log(mess)
+                        window.plugins.toast.showLongBottom(mess.resMess, function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+                        //$scope.$digest();
+                    },
+                    error: function (err) {
+                        console.log(err)
+                        window.plugins.toast.showLongBottom(err.responseText, function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+                    }
+                });
+
+            }
+
+            $scope.postAction = function (action, postId) {
+
+                if (action == "Delete") {
+
+                    $scope.deletemyPost(postId);
+                }
+
+                if (action == "Report")
+                    reportPost(postId, $scope.loggedUser);
+
+            }
+            $scope.deletemyPost = function (postId) {
+
+                if (window.confirm("Are you sure you want to delete this post?")) {
+                    var post = $scope.posts.find(x => x.Id === postId);
+                    var index = $scope.posts.indexOf(post);
+                    $scope.posts.splice(index, 1);
+                    event.preventDefault();
+                    $.ajax({
+                        url: "https://techforest.co.za/Itende/deletePost.php",
+                        method: "POST",
+                        data: { postID: postId },
+                        dataType: "json",
+                        success: function (mess) {
+                            console.log(mess)
+                            //$scope.$digest();
+                            // alert(mess.resMess);
+                            window.plugins.toast.showLongBottom(mess.resMess, function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+
+                            //  window.location.reload();
+                        },
+                        error: function (err) {
+                            window.plugins.toast.showLongBottom(err.responseText, function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+
+                        }
+                    });
+                }
+            }
+            $scope.openComments = function (postId) {
+                $scope.comments = [];
+                var commentsModal = document.getElementById("commentsModal");
+                commentsModal.style.display = "block";
+                var body = document.body;
+                body.style = "overflow-y: hidden;";
+                $scope.openPostID = postId;
+                $scope.fetchComments(postId);
+            }
+            $scope.pushComment = function (comment) {
+                $.ajax({
+                    url: "https://techforest.co.za/Itende/postComment2.php",
+                    method: "POST",
+                    data: comment,
+                    dataType: "json",
+                    success: function (mess) {
+                        console.log(mess)
+                        $scope.comments.find(x => x.Id === comment.Id).Id = mess.comentId;
+                        //window.plugins.toast.showLongBottom(mess.resMess, function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+                        // $scope.comments=[];
+                        // angular.forEach(mess, function (value, key) {
+                        //     value.Date = $scope.getDate(value.Date);
+                        //     $scope.comments.push(value);
+                        //     console.log($scope.comments);
+                        // })
+                        // $('#loading').hide();
+                        // $scope.$digest();
+                    },
+                    error: function (err) {
+                        console.log(err)
+                    }
+                });
+            }
+            $scope.pushPost = function (post) {
+                $('#post').addClass('disabled');
+                var idUpdate = ($scope.isPostUpdate) ? post.Id : "";
+                var tempId = 0;
+                if (!$scope.isPostUpdate)
+                    tempId = post.Id;
+
+                console.log(post);
+                var postMessage = $('#postMessage').val();
+                $scope.postMess = "";
+                if (postMessage != "") {
+                    //console.log(idUpdate);
+                    event.preventDefault();
+                    $.ajax({
+                        url: "https://techforest.co.za/Itende/posting2.php",
+                        method: "POST",
+                        data: { Id: idUpdate, postMessage: post.postMessage, Email: post.Email },
+                        dataType: "json",
+                        success: function (mess) {
+                            idUpdate = 0;
+                            console.log(mess.resMess);
+
+
+
+                            window.plugins.toast.showLongBottom(mess.resMess, function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+                            //window.localStorage.setItem("IdUpdate", "");
+                            if (!$scope.isPostUpdate) {
+                                $scope.posts.find(x => x.Id === tempId).Id = mess.resId;
+                            }
+
+                            $scope.closemypost();
+                        },
+                        error: function (err) {
+                            //alert(err.responseText);
+                            console.log(err.responseText);
+                            window.plugins.toast.showLongBottom(err.responseText, function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+
+                        }
+                    });
+                } else {
+                    window.plugins.toast.showShortTop('Write Something before posting!', function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) })
+                    //window.plugins.toast.showLongBottom(mess.resMess, function(a){console.log('toast success: ' + a)}, function(b){alert('toast error: ' + b)});
+                }
+            }
+            $scope.uploadBeatFile = function () {
+
+
+                var file = document.getElementById('file').files[0];
+                var isUpload = false;
+                isUpload = (file && file.size < 5485760) ? true : false;
+
+                if (!isUpload) {
+                    alert(fileTooBig);
+                    return;
+                }
+
+                $.ajax({
+                    url: "https://techforest.co.za/Itende/upload_file.php",
+                    method: "POST",
+                    data: comment,
+                    dataType: "json",
+                    success: function (mess) {
+                        console.log(mess)
+                        // $scope.comments=[];
+                        // angular.forEach(mess, function (value, key) {
+                        //     value.Date = $scope.getDate(value.Date);
+                        //     $scope.comments.push(value);
+                        //     console.log($scope.comments);
+                        // })
+                        // $('#loading').hide();
+                        // $scope.$digest();
+                    },
+                    error: function (err) {
+                        console.log(err)
+                    }
+                });
+            }
+            $scope.fetchComments = function (x) {
+                $.ajax({
+                    url: "https://techforest.co.za/Itende/getComments.php",
+                    method: "POST",
+                    data: { postID: x },
+                    dataType: "json",
+                    success: function (mess) {
+
+                        angular.forEach(mess, function (value, key) {
+                            value.Date = $scope.getDate(value.Date);
+                            $scope.posts.find(x => x.Id === value.postId).numOfComments = mess.length;
+                            $scope.comments.push(value);
+                            console.log($scope.comments);
+                        })
+                        $('#loading').hide();
+                        $scope.comsg = ($scope.comments.length == 0) ? "No comments" : "";
+                        $scope.$digest();
+                    },
+                    error: function (err) {
+                        console.log(err)
+
+                    }
+                });
+            }
+            $scope.getDate = function (pdate) {
+                var date = new Date(pdate);
+                var now = new Date();
+                const date1 = new Date(pdate);
+                const date2 = new Date();
+
+                const diffTime = Math.abs(date2 - date1);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+                var datrr = moment(date).fromNow();
+                var date2v = moment(date).calendar();
+
+                if (diffDays > 3) {
+                    return date2v;
+
+                } else if (diffDays < 3 && diffDays > 1) {
+                    return date2v;
+                } else {
+                    return date2v;
+                }
+            }
+        });
+        $(document).ready(function () {
+            // setInterval(function(){
+
+            //     alert("");
+            // }, 9000);
+            $("#submit").click(function (event) {
+
+                var form = $(this);
+                event.preventDefault();
+                $.ajax({
+                    url: "https://techforest.co.za/Itende/deletePost.php",
+                    method: "POST",
+                    data: form.serialize(),
+                    dataType: "json",
+                    success: function (mess) {
+
+                        console.log(mess);
+                        // alert(mess.resMess);
+                        window.plugins.toast.showLongBottom(mess.resMess, function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+
+                        // window.location.reload();
+                    },
+                    error: function (err) {
+
+                    }
+                });
+
+            });
+
+
+
+        });
+
+        document.addEventListener("offline", onOffline, false);
+
+        function onOffline() {
+            window.plugins.toast.showLongBottom('NO INTERNET CONNECTION!', function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+            $('#loading').hide();
+            return;
+        }
+        // Get the modal
+        var modal = document.getElementById("myModal");
+        var modal2 = document.getElementById("myModal2");
+        var commentsModal = document.getElementById("commentsModal");
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("myBtn");
+        // var btnFile = document.getElementById("myBtnFile");
+
+        // Get the <span> element that closes the modal
+        var spans = document.getElementsByClassName("close");
+        var span2 = document.getElementsByClassName("close")[1];
+        var span3 = document.getElementsByClassName("close")[2];
+
+        // When the user clicks the button, open the modal 
+        btn.onclick = function () {
+            modal.style.display = "block";
+            $('#postMessage').val("");
+            //$('#post').html("Post");
+            window.localStorage.setItem("IdUpdate", "");
+        }
+
+        // btnFile.onclick = function () {
+        //     modal2.style.display = "block";
+        //     // window.localStorage.setItem("IdUpdate", "");
+        // }
+        console.log(spans)
+        for (var x = 0; spans.length; x++) {
+            spans[x].onclick = function () {
+                var modals = document.getElementsByClassName("modal");
+                console.log(modals)
+                for (var xx = 0; modals.length; xx++) {
+                    modals[xx].style.display = "none";
+                }
+            }
+        }
+       
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+
+        }
+
+
+        function deletePost(x) {
+            if (window.confirm("Are you sure ?")) {
+                event.preventDefault();
+                $.ajax({
+                    url: "https://techforest.co.za/Itende/deletePost.php",
+                    method: "POST",
+                    data: { postID: x },
+                    dataType: "json",
+                    success: function (mess) {
+                        console.log(mess)
+                        // alert(mess.resMess);
+                        // window.plugins.toast.showLongBottom(mess.resMess, function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+
+                        /// window.location.reload();
+                    },
+                    error: function (err) {
+
+                    }
+                });
+            }
+        }
+        function reportPost(postId, email) {
+            if (window.confirm("Are you sure you want to report this post?")) {
+                event.preventDefault();
+                $.ajax({
+                    url: "https://techforest.co.za/Itende/reportPost.php",
+                    method: "POST",
+                    data: { postId: postId, Email: email },
+                    dataType: "json",
+                    success: function (mess) {
+                        console.log(mess)
+                        // alert(mess.resMess);
+                        window.plugins.toast.showLongBottom(mess.resMess, function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+
+                        //window.location.reload();
+                    },
+                    error: function (err) {
+                        console.log(err)
+                    }
+                });
+            }
+        }
+        window.onload = function () {
+           
+            if (localStorage.getItem("openUserTab") == undefined || localStorage.getItem("openTab") == "" || localStorage.getItem("openTab") == null) {
+
+                localStorage.setItem("openUserTab", "postingSetion");
+            } else {
+                var currentTab = localStorage.getItem("openUserTab");
+                swiptoTab(currentTab, currentTab + "Tab");
+            }
+        }
+
+        function logout() {
+            if (window.confirm("Are you sure?")) {
+
+                window.localStorage.setItem("userEmail", "");
+                window.location.href = "index.html";
+                window.plugins.toast.showLongBottom("Logged Out", function (a) { console.log('toast success: ' + a) }, function (b) { alert('toast error: ' + b) });
+            }
+        }
+
+        function openTab(thisss, tabName) {
+            var i, x, tablinks;
+            console.log(thisss);
+            console.log(thisss.id)
+            localStorage.setItem("openTab", tabName);
+            x = document.getElementsByClassName("city");
+            icons = document.getElementsByClassName("fa-icons");
+            tablinks = document.getElementsByClassName("tablink");
+
+            for (i = 0; i < x.length; i++) {
+                icons[i].className = icons[i].className.replace(" tabC", "");
+            }
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" activetablink", "");
+            }
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            document.getElementById(tabName).style.display = "block";
+            var faicon = thisss.querySelector(".fa-icons");
+            var span = thisss.querySelector("span");
+            faicon.classList.add("tabC");
+            span.classList.add("tabC");
+
+            thisss.classList.add("activetablink");
+            if (tabName == "tutorials")
+                getTutorials();
+
+            //if (window.AdMob) AdMob.showInterstitial();
+            // event.preventDefault();
+        }
+        function swiptoTab(tabName, tabButton) {
+            console.log(tabName + ": received")
+            localStorage.setItem("openTab", tabName);
+            var xxx = localStorage.getItem("openTab");
+            console.log(xxx + " open Tab");
+            var i, x, tablinks;
+            x = document.getElementsByClassName("city");
+            icons = document.getElementsByClassName("fa-icons");
+            tablinks = document.getElementsByClassName("tablink");
+            console.log(tablinks);
+            for (i = 0; i < x.length; i++) {
+                icons[i].className = icons[i].className.replace(" tabC", "");
+            }
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" activetablink", "");
+            }
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            document.getElementById(tabName).style.display = "block";
+            var thisss = document.getElementById(tabButton);
+            console.log(thisss)
+            var faicon = thisss.querySelector(".fa-icons");
+            var span = thisss.querySelector("span");
+            faicon.classList.add("tabC");
+            span.classList.add("tabC");
+            thisss.classList.add("activetablink");
+
+            //if (window.AdMob) AdMob.showInterstitial();
+            // event.preventDefault();
+        }
+        document.addEventListener('touchstart', handleTouchStart, false);
+        document.addEventListener('touchmove', handleTouchMove, false);
+
+        var xDown = null;
+        var yDown = null;
+
+        function getTouches(evt) {
+            return evt.touches ||             // browser API
+                evt.originalEvent.touches; // jQuery
+        }
+
+        function handleTouchStart(evt) {
+            const firstTouch = getTouches(evt)[0];
+            xDown = firstTouch.clientX;
+            yDown = firstTouch.clientY;
+        };
+
+        function handleTouchMove(evt) {
+            if (!xDown || !yDown) {
+                return;
+            }
+
+            var xUp = evt.touches[0].clientX;
+            var yUp = evt.touches[0].clientY;
+
+            var xDiff = xDown - xUp;
+            var yDiff = yDown - yUp;
+
+            if (Math.abs(xDiff) > Math.abs(yDiff)) {/*most significant*/
+                if (xDiff > 0) {
+                    /*  swipe to left */
+                    console.log("left")
+                    //console.log(currentTab)
+                    // 1
+                    currentTab = localStorage.getItem("openUserTab");
+                    console.log(currentTab)
+                    switch (currentTab) {
+                        case "postingSection":
+                            swiptoTab("profileSection", "profileTab");
+                            break;
+                        case "profileSection":
+                            break;
+                    }
+
+                } else {
+                    /*  swipe to right */
+                    console.log("RRRRRR")
+
+
+                    currentTab = localStorage.getItem("openUserTab");
+                    console.log(currentTab)
+                    switch (currentTab) {
+                        case "postingSection":
+                            break;
+                        case "profileSection":
+                            swiptoTab("postingSection", "homeTab");
+                            getTutorials();
+                            break;
+                    }
+
+                }
+            } else {
+                if (yDiff > 0) {
+                    /* up swipe */
+                } else {
+                    /* down swipe */
+                }
+            }
+            /* reset values */
+            xDown = null;
+            yDown = null;
+        };
+  
+    </script>
+</body>
+
+</html>

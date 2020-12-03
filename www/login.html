@@ -23,9 +23,9 @@
             <a class="navbar-brand text-dark" href="index.html"><i class="fa fa-angle-left fa-lg"></i><b>
                     <labe id="subTop" class="text-center">Login</labe>
                 </b></a>
-            <button class="navbar-toggler" onclick="menu()" type="button">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+                <button class="navbar-toggler" onclick="menu()" type="button">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
             <div class="collapse navbar-collapse" id="navbarCollapse" style="margin-top: 10px;">
                 <ul class="navbar-nav mr-auto">
                     <li><a class="nav-item" href="DownloadBeats.html">Beats <i class="fa fa-arrow-circle-down"></i></a>
@@ -85,8 +85,8 @@
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/popper.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="index.js"></script>
-    <script src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="index123.js"></script>
+    <script src="js/jquery-3.5.1.min.js"></script>
     <script type="text/javascript">
     
 
@@ -100,7 +100,8 @@
             return re.test(email);
         }
         $(document).ready(function () {
-            window.localStorage.clear();
+            //window.localStorage.clear();
+            window.localStorage.setItem("userEmail","");
             $("#submit").click(function (event) {
 
                 var Email = $("#email").val();
@@ -121,7 +122,7 @@
                             if(mess.resCode==0)
                             {
                                 //alert(mess.resMess);
-                                window.localStorage.clear();
+                               // window.localStorage.clear();
                                 window.localStorage.setItem("vNumber",mess.vNumber);
                                 window.localStorage.setItem("userEmail",mess.Email);
                                 window.location.href="verify.html";
@@ -133,16 +134,16 @@
                               window.plugins.toast.showLongBottom(mess.resMess, function(a){console.log('toast success: ' + a)}, function(b){alert('toast error: ' + b)});
                                
                             }else{
-                               window.localStorage.clear();
+                               //window.localStorage.clear();
                                window.localStorage.setItem("Name",mess.Name);
                                window.localStorage.setItem("Surname",mess.Surname);
                                window.localStorage.setItem("userEmail",mess.Email);
-                               window.location.href="userPosts.html";
+                               window.location.href="userPosts2.html";
                             }
                         },
                         error: function (err) {
-
-                           window.plugins.toast.showLongBottom(err.responseText.toString(), function(a){console.log('toast success: ' + a)}, function(b){alert('toast error: ' + b)});
+                           alert(err.responseText);
+                           //window.plugins.toast.showLongBottom(err.responseText.toString(), function(a){console.log('toast success: ' + a)}, function(b){alert('toast error: ' + b)});
                             //alert(err.responseText);
                             $('#submit').prop('disabled',false);
                             //window.location.href = "signup.html";

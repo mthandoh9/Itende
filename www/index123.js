@@ -73,5 +73,75 @@ function menu(){
  function onDeviceReady() {
   StatusBar.overlaysWebView(false);
  }
+ function openBrowser(x) {
+  var url = "";
+  switch (x) {
+    case 1:
+      url = "https://www.facebook.com/profile.php?id=100008545117911";
+      break;
+    case 2:
+      url = "https://www.facebook.com/themba.talent.9";
+      break;
+    case 3:
+      url = "https://www.facebook.com/lihle.dumisa";
+      break;
+    case 4:
+      url = "https://www.facebook.com/mickealjohn.mitshel";
+      break;
+  }
+
+  var target = '_blank';
+  var options = "location = yes"
+  var ref = cordova.InAppBrowser.open(url, target, options);
+
+  ref.addEventListener('loadstart', loadstartCallback);
+  ref.addEventListener('loadstop', loadstopCallback);
+  ref.addEventListener('loaderror', loaderrorCallback);
+  ref.addEventListener('exit', exitCallback);
+
+  function loadstartCallback(event) {
+    console.log('Loading started: ' + event.url);
+  }
+
+  function loadstopCallback(event) {
+    console.log('Loading finished: ' + event.url);
+  }
+
+  function loaderrorCallback(error) {
+    console.log('Loading error: ' + error.message);
+  }
+
+  function exitCallback() {
+    console.log('Browser is closed...');
+  }
+}
+
+function openBrowserTutorials(x) {
+  var url = x;
+  var target = '_blank';
+  var options = "location = yes"
+  var ref = cordova.InAppBrowser.open(url, target, options);
+
+  ref.addEventListener('loadstart', loadstartCallback);
+  ref.addEventListener('loadstop', loadstopCallback);
+  ref.addEventListener('loaderror', loaderrorCallback);
+  ref.addEventListener('exit', exitCallback);
+
+  function loadstartCallback(event) {
+    console.log('Loading started: ' + event.url);
+  }
+
+  function loadstopCallback(event) {
+    console.log('Loading finished: ' + event.url);
+  }
+
+  function loaderrorCallback(error) {
+    console.log('Loading error: ' + error.message);
+  }
+
+  function exitCallback() {
+    console.log('Browser is closed...');
+  }
+}
 
  

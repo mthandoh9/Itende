@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src *; style-src *  'unsafe-inline'; script-src *  'unsafe-inline'; media-src *">
+    <meta name="viewport"
+        content="initial-scale=1,user-scalable=no, width=device-width, height=device-height, viewport-fit=cover">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="mainStyle.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.mobile.theme-1.4.5.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.mobile.icons-1.4.5.min.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.mobile.structure-1.4.5.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.mobile-1.4.5.js"></script>
+    <style>
+        .userPosts {
+            margin-top: 10px;
+            border: 1px solid black;
+            border-radius: 5px;
+            padding: 3px;
+            box-shadow: 2px 2px 2px #5e5e5e;
+
+            white-space: pre-wrap;
+            /* CSS3 */
+            white-space: -moz-pre-wrap;
+            /* Firefox */
+            white-space: -pre-wrap;
+            /* Opera <7 */
+            white-space: -o-pre-wrap;
+            /* Opera 7 */
+            word-wrap: break-word;
+            /* IE */
+        }
+
+        .postMessage {
+
+            width: 100%;
+            overflow-y: scroll;
+            height: 230px;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* The Modal (background) */
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            padding-top: 100px;
+            /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0);
+            /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 99%;
+            height: 347px;
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-warning text-dark" id="navbar">
+            <a class="navbar-brand text-dark" href="javascript:history.go(-1)"><i class="fa fa-angle-left fa-lg"></i><b>
+                    <labe id="subTop" class="text-center">Wall</labe>
+                </b></a>
+            <button class="navbar-toggler" onclick="menu()" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse" style="margin-top: 10px;">
+                <ul class="navbar-nav mr-auto">
+                    <li><a class="nav-item" href="DownloadBeats.html">Beats <i class="fa fa-arrow-circle-down"></i></a>
+                    </li>
+                    <li><a class="nav-item" href="downloadFiles.html">Files <i class="fa fa-arrow-circle-down"></i></a>
+                    </li>
+                    <li><a class="nav-item" href="TempoChanger.html">TempoChanger <i
+                                class="fa fa-play-circle-o"></i></a></li>
+                    <li><a class="nav-item" href="tutorials.html">Tutorials <i class="fa fa-youtube-play"></i></a></li>
+                    <li><a class="nav-item" id="share" href="#share">Share <i class="fa fa-share-alt"></i></a></li>
+                    <li><a class="nav-item" id="logout" onclick="logout()">Logout <i class="fa fa-sign-out"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div id="section1" class="container-fluid">
+        <a id="myBtn" class="btn btn-sm btn-warning">Create Post <i class="fa fa-newspaper-o"></i></a>
+        <form id="uploadimage" action="" method="post" enctype="multipart/form-data">
+
+          <input type="submit" id="submit" name="submit" value="submit"/>
+          <input type="file" id="file" name="file"/>
+        </form>
+        <!-- <div id="root">
+            <center><img src="img/loading.gif" id="loading" /></center>
+        </div> -->
+    </div>
+    <div id="overlay-invite">
+        <div class="invite">
+            <div class="invite-content">
+                <ul class="invite-list">
+                    <button onClick="fbShare()" class="invite-item" style="background: #103d99;"><i
+                            class="fa fa-facebook"></i></button>
+                    <button onClick="whatsappShare()" class="invite-item"
+                        style="background: linear-gradient(#32b221,#24a316);"><i class="fa fa-whatsapp"></i></button>
+                    <button onClick="twitterShare()" class="invite-item"
+                        style="background: linear-gradient(#5bbfdb,#82d1e7);"><i class="fa fa-twitter"></i></button>
+                    <button onClick="otherShare()" class="invite-item" style="background: #ffc107;">
+                        <i style="color:black" class="fa fa-pencil"></i></button>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="js/slim.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="index123.js"></script>
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/moment.js"></script>
+    <script>
+       $("#uploadimage").on('submit',(function (e){
+			e.preventDefault();
+
+            $.ajax({
+
+                url: "http://techforest.co.za/Itende/upload.php",
+                type: "POST",
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (data) {
+
+                    console.log(data);
+
+                }
+            });
+
+        }));
+    </script>
+</body>
+</html>
